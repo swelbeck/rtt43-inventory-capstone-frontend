@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createItem } from "../utilities/itemController.mjs";
+import { InventoryContext } from "../contexts/InventoryContext";
+import ACTIONS from "../utilities/inventoryReducerActions.mjs";
 
 export default function AddItemsForm() {
   const nav = useNavigate();
+  const {dispatch} = useContext(InventoryContext)
+
   const [formData, setFormData] = useState({
     name: "",
     category: "",
@@ -14,7 +18,7 @@ export default function AddItemsForm() {
   });
 
   function handleClick() {
-    nav("/");
+    nav("/inventory");
   }
 
   function handleChange(e) {
@@ -34,9 +38,10 @@ export default function AddItemsForm() {
   async function handleSubmit(e) {
     try {
       e.preventDefault();
-      let res = await createItem(formData);
-      // setInventory([...inventory, res]);
+      const newItem = await createItem(formData);
+      dispatch({type: ACTIONS.ADD_ITEM, payload: newItem})
       nav("/inventory");
+      
     } catch (error) {
       console.error(error);
     }

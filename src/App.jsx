@@ -5,6 +5,7 @@ import Inventory from "./pages/Inventory";
 import Login from "./pages/Login";
 import ShoppingList from "./pages/ShoppingList";
 import NotFound from "./pages/NotFound";
+import AddItemsForm from "./components/AddItemsForm";
 import Nav from "./components/Nav";
 
 import "./App.css";
@@ -17,6 +18,7 @@ function App() {
         <Route path="/" element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
         <Route path="/inventory" element={<Inventory />} />
+        <Route path="/add-items" element={<AddItemsForm />} />
         <Route path="/shopping-list" element={<ShoppingList />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

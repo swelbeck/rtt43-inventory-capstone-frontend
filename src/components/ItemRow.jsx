@@ -1,11 +1,16 @@
+import { useContext } from "react";
 import { deleteItem } from "../utilities/itemController.mjs";
+import { InventoryContext } from "../contexts/InventoryContext";
+import ACTIONS from "../utilities/inventoryReducerActions.mjs";
 
-function ItemRow({ product, setInventory }) {
-  async function handleDelete() {
+function ItemRow({ item}) {
+  const {dispatch} = useContext(InventoryContext)
+
+  async function handleDelete(id) {
     try {
-      const success = await deleteItem(product._id);
+      const success = await deleteItem(item._id);
       if (success) {
-        setInventory((prev) => prev.filter((el) => el._id !== product._id));
+        dispatch({type: ACTIONS.DELETE_ITEM, payload: id});
       }
     } catch (error) {
       console.error("Error deleting item:", error);
@@ -14,8 +19,8 @@ function ItemRow({ product, setInventory }) {
 
   return (
     <tr>
-      <td>{product.name}</td>
-      <td>{product.quantity}</td>
+      <td>{item.name}</td>
+      <td>{item.quantity}</td>
       <td>
         <button onClick={handleDelete}>Delete</button>
       </td>

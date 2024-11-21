@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { getInventory } from "../utilities/itemController.mjs";
 import InventoryTable from "../components/InventoryTable";
 
@@ -21,6 +22,7 @@ export default function Inventory() {
   return (
     <div>
       <h2>Your Inventory</h2>
+      <Link to={"/add-items"}>Add Items</Link>
       {inventory.length > 0 ? (
         <InventoryTable items={inventory} setInventory={setInventory} />
       ) : (

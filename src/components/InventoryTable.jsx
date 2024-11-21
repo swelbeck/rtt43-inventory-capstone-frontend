@@ -14,7 +14,7 @@ function InventoryTable({ items, setInventory }) {
     }
 
     rows.push(
-      <ItemRow product={el} setInventory={setInventory} key={el._id} />
+      <ItemRow item={el} setInventory={setInventory} key={el._id} />
     );
   });
 

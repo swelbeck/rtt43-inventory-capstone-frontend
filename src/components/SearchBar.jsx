@@ -1,13 +1,11 @@
 function SearchBar({ formData, setFormData }) {
   function handleChange(e) {
-    // if (e.target.name == "inStock") {
-    //   setFormData({ ...formData, inStock: !formData.inStock });
-    // } else {
+
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
-    // }
+
   }
 
   return (
@@ -20,10 +18,7 @@ function SearchBar({ formData, setFormData }) {
         placeholder="Search..."
       />
       <br />
-      {/* <label>
-        <input onChange={handleChange} name="inStock" type="checkbox" /> Only
-        show products in stock
-      </label> */}
+
     </form>
   );
 }
