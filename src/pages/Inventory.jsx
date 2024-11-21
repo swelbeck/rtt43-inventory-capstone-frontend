@@ -23,8 +23,16 @@ export default function Inventory() {
     <div>
       <h2>Your Inventory</h2>
       <Link to={"/add-items"}>Add Items</Link>
-      {inventory.length > 0 ? (
-        <InventoryTable items={inventory} setInventory={setInventory} />
+      {Object.keys(category).length > 0 ? (
+        <div className="categories">
+          {Object.entries(category).map(([cat, items]) => (
+            <InventoryCategory
+              key={cat}
+              category={cat}
+              items={items}
+            />
+          ))}
+        </div>
       ) : (
         <p>No items in inventory</p>
       )}
