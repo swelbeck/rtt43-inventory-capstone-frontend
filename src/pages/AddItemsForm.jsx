@@ -43,15 +43,15 @@ export default function AddItemsForm() {
       alert("This category already exists!");
       return;
     }
-console.log(formData);
+    console.log(formData);
     try {
       e.preventDefault();
       const newItem = await createItem(formData);
-      
+
       console.log(newItem);
 
       dispatch({ type: ACTIONS.ADD_ITEM, payload: newItem });
-      
+
       nav("/inventory");
     } catch (error) {
       console.error(error);
@@ -74,6 +74,7 @@ console.log(formData);
             <option value="groceries">Groceries</option>
             <option value="household">Household</option>
             <option value="clothes">Clothes</option>
+            <option value="clothes">Other</option>
           </select>
         </label>
         <br />
