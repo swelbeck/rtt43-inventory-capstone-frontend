@@ -1,58 +1,54 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useContext } from "react";
 import { Link } from "react-router-dom";
 import { InventoryContext } from "../contexts/InventoryContext";
 import InventoryCategory from "../components/InventoryCategory";
-import { findItemsByCategory } from "../utilities/itemController.mjs";
-import AddItemsForm from "./AddItemsForm";
 
 export default function Inventory() {
   const { inventory } = useContext(InventoryContext);
+  const [filteredCategory, setFilteredCategory] = useState("");
 
   // Group items by category
   const categories = inventory.reduce((acc, item) => {
-
-    if (!item || !item.category) return acc;
-
-    if (!acc[item.category]) acc[item.category] = [];
-    acc[item.category].push(item);
+    const category = item.category?.trim() || "Uncategorized";
+    if (!acc[category]) acc[category] = [];
+    acc[category].push(item);
     return acc;
   }, {});
 
-  function handleSubmit(e){
-    e.preventDefault()
-  }
+  // Filter items by selected category
+  const filteredItems = filteredCategory
+    ? { [filteredCategory]: categories[filteredCategory] || [] }
+    : categories;
 
-  async function handleChange(e){
-    console.log(e.target)
-    if(e.target.value){
-      await findItemsByCategory(e.target.value)
-    }
+  function handleFilterChange(e) {
+    setFilteredCategory(e.target.value);
   }
 
   return (
     <div className="inventory-container">
       <h2>Your Inventory</h2>
       <Link to={"/add-items"}>Add Item to Inventory</Link>
-      <form onSubmit={handleSubmit}>
-        <label htmlFor="">
+      <form>
+        <label htmlFor="catFilter">
           Filter by Category:
           <select
-            onChange={handleChange}
-            name="catFilter"
             id="catFilter"
+            name="catFilter"
+            onChange={handleFilterChange}
+            value={filteredCategory}
           >
-            {categories &&
-              Object.keys(categories).map((el) => (
-                <option key={el} value={el}>
-                  {el}
-                </option>
-              ))}
+            <option value="">All Categories</option>
+            {Object.keys(categories).map((el) => (
+              <option key={el} value={el}>
+                {el}
+              </option>
+            ))}
           </select>
         </label>
       </form>
-      {Object.keys(categories).length > 0 ? (
+      {Object.keys(filteredItems).length > 0 ? (
         <div className="categories">
-          {Object.entries(categories).map(([category, items]) => (
+          {Object.entries(filteredItems).map(([category, items]) => (
             <InventoryCategory
               key={category}
               category={category}
