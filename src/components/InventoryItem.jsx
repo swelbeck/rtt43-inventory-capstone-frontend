@@ -10,7 +10,7 @@ export default function InventoryItem({ item }) {
   async function handleToggleShopping() {
     try {
       const updatedItem = await toggleShoppingListStatus(item._id);
-      dispatch({ type: ACTIONS.UPDATE_ITEM, payload: updatedItem });
+      dispatch({ type: ACTIONS.TOGGLE_SHOPPING_STATUS, payload: updatedItem });
     } catch (error) {
       console.error("Error updating shopping list status:", error);
     }

@@ -7,7 +7,7 @@ import ACTIONS from "../utilities/inventoryReducerActions.mjs";
 
 export default function AddItemsForm() {
   const nav = useNavigate();
-  const {dispatch} = useContext(InventoryContext)
+  const { dispatch } = useContext(InventoryContext);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -37,20 +37,22 @@ export default function AddItemsForm() {
   }
 
   async function handleSubmit(e) {
+    const catExists = await checkCategoryExists(formData.category);
 
-    const catExists = await checkCategoryExists(formData.category)
-
-    if(catExists){
-      alert("This category already exists!")
+    if (catExists) {
+      alert("This category already exists!");
       return;
     }
-
+console.log(formData);
     try {
       e.preventDefault();
       const newItem = await createItem(formData);
-      dispatch({type: ACTIONS.ADD_ITEM, payload: newItem})
-      nav("/inventory");
       
+      console.log(newItem);
+
+      dispatch({ type: ACTIONS.ADD_ITEM, payload: newItem });
+      
+      nav("/inventory");
     } catch (error) {
       console.error(error);
     }
@@ -68,6 +70,7 @@ export default function AddItemsForm() {
         <label>
           Category:{" "}
           <select onChange={handleChange} type="text" name="category">
+            <option value="">Select an option</option>
             <option value="groceries">Groceries</option>
             <option value="household">Household</option>
             <option value="clothes">Clothes</option>

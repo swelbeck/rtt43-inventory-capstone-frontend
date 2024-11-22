@@ -4,12 +4,19 @@ import {
   toggleShoppingListStatus,
   deleteItem,
 } from "../utilities/itemController.mjs";
+import ACTIONS from "../utilities/inventoryReducerActions.mjs";
 
 export default function ShoppingList() {
   const { inventory, dispatch } = useContext(InventoryContext);
 
   // Group items by category
-  const shoppingList = inventory.filter((item) => item.addedToShoppingList);
+  const shoppingList = inventory.filter(
+    (item) => item.addedToShoppingList && item.shoppingStatus === "shopping"
+  );
+  const boughtItems = inventory.filter(
+    (item) => item.shoppingStatus === "bought"
+  );
+
   const categories = shoppingList.reduce((acc, item) => {
     if (!acc[item.category]) acc[item.category] = [];
     acc[item.category].push(item);
@@ -19,7 +26,7 @@ export default function ShoppingList() {
   async function handleToggle(item) {
     try {
       const updatedItem = await toggleShoppingListStatus(item._id);
-      dispatch({ type: "UPDATE_ITEM", payload: updatedItem });
+      dispatch({ type: ACTIONS.TOGGLE_SHOPPING_STATUS, payload: updatedItem });
     } catch (error) {
       console.error("Error toggling shopping list status:", error);
     }
@@ -29,7 +36,7 @@ export default function ShoppingList() {
     try {
       const success = await deleteItem(item._id);
       if (success) {
-        dispatch({ type: "DELETE_ITEM", payload: item._id });
+        dispatch({ type: ACTIONS.DELETE_ITEM, payload: item._id });
       }
     } catch (error) {
       console.error("Error deleting item:", error);
@@ -39,30 +46,33 @@ export default function ShoppingList() {
   return (
     <div className="shopping-list">
       <h2>Shopping List</h2>
-      {Object.keys(categories).length > 0 ? (
-        <div className="categories">
-          {Object.entries(categories).map(([category, items]) => (
-            <div className="category" key={category}>
-              <h3>{category}</h3>
-              <ul>
-                {items.map((item) => (
-                  <li key={item._id}>
-                    <input
-                      type="checkbox"
-                      checked={item.addedToShoppingList}
-                      onChange={() => handleToggle(item)}
-                    />
-                    {item.name} (Quantity: {item.quantity})
-                    <button onClick={() => handleDelete(item)}>Delete</button>
-                  </li>
-                ))}
-              </ul>
-            </div>
+
+      <div className="category">
+        <h3>Shopping List</h3>
+        <ul>
+          {shoppingList.map((item) => (
+            <li key={item._id}>
+              <input
+                type="checkbox"
+                checked={item.shoppingStatus === "bought"}
+                onChange={() => handleToggle(item)}
+              />
+              {item.name} (Quantity: {item.quantity})
+            </li>
           ))}
-        </div>
-      ) : (
-        <p>No items in shopping list</p>
-      )}
+        </ul>
+      </div>
+
+      <div className="category">
+        <h3>Bought</h3>
+        <ul>
+          {boughtItems.map((item) => (
+            <li key={item._id}>
+              {item.name} (Quantity: {item.quantity}) - Bought
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

@@ -10,14 +10,14 @@ export default function inventoryReducer(state, action) {
       return state.filter((item) => item._id !== action.payload);
     case ACTIONS.EDIT_ITEM:
       return state.map((item) =>
-        item.id === action.payload.id
+        item._id === action.payload._id
           ? { ...item, name: action.payload.name }
           : item
       );
-    case ACTIONS.UPDATE_ITEM:
+    case ACTIONS.TOGGLE_SHOPPING_STATUS:
       return state.map((item) =>
-        item.id === action.payload.id
-          ? action.payload
+        item._id === action.payload._id
+          ? { ...item, shoppingStatus: action.payload.shoppingStatus }
           : item
       );
     default:
