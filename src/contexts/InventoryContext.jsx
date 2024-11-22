@@ -1,29 +1,3 @@
-import { createContext, useReducer, useEffect } from "react";
-import { getInventory } from "../utilities/itemController.mjs";
-import ACTIONS from "../utilities/inventoryReducerActions.mjs";
-import inventoryReducer from "../utilities/inventoryReducer.mjs";
+import { createContext } from "react";
 
 export const InventoryContext = createContext();
-
-export default function InventoryProvider({ children }) {
-  const [inventory, dispatch] = useReducer(inventoryReducer, []);
-
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await getInventory();
-        dispatch({ type: ACTIONS.SET_INVENTORY, payload: data });
-      } catch (error) {
-        console.error("Error fetching inventory:", error);
-      }
-    }
-
-    fetchData();
-  }, []);
-
-  return (
-    <InventoryContext.Provider value={{ inventory, dispatch }}>
-      {children}
-    </InventoryContext.Provider>
-  );
-}
