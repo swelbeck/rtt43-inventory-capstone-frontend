@@ -33,6 +33,7 @@ export default function InventoryItem({ item }) {
         <strong>{item.name}</strong>
       </p>
       <p>Quantity: {item.quantity}</p>
+      <button>Details</button>
       <button onClick={handleToggleShopping}>
         {item.addedToShoppingList
           ? "Remove from Shopping List"

@@ -1,7 +1,7 @@
 import { createContext, useReducer, useEffect } from "react";
 import { getInventory } from "../utilities/itemController.mjs";
-import ACTIONS from "../utilities/inventoryReducerActions.mjs"
-import inventoryReducer from "../utilities/inventoryReducer.mjs"
+import ACTIONS from "../utilities/inventoryReducerActions.mjs";
+import inventoryReducer from "../utilities/inventoryReducer.mjs";
 
 export const InventoryContext = createContext();
 
@@ -27,4 +27,3 @@ export default function InventoryProvider({ children }) {
     </InventoryContext.Provider>
   );
 }
-

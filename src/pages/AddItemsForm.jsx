@@ -11,11 +11,12 @@ export default function AddItemsForm() {
 
   const [formData, setFormData] = useState({
     name: "",
-    category: "",
+    category: "Uncategorized",
     quantity: 1,
     datePurchased: Date.now(),
     reminderDate: Date.now() + 7,
     addedToShoppingList: false,
+    shoppingStatus: "None",
   });
 
   function handleClick() {
@@ -37,18 +38,11 @@ export default function AddItemsForm() {
   }
 
   async function handleSubmit(e) {
-    const catExists = await checkCategoryExists(formData.category);
-
-    if (catExists) {
-      alert("This category already exists!");
-      return;
-    }
-    console.log(formData);
+    e.preventDefault();
     try {
-      e.preventDefault();
       const newItem = await createItem(formData);
 
-      console.log(newItem);
+      console.log("New item from backend:", newItem);
 
       dispatch({ type: ACTIONS.ADD_ITEM, payload: newItem });
 
@@ -69,8 +63,12 @@ export default function AddItemsForm() {
 
         <label>
           Category:{" "}
-          <select onChange={handleChange} type="text" name="category">
-            <option value="">Select an option</option>
+          <select
+            onChange={handleChange}
+            name="category"
+            value={formData.category}
+          >
+            <option value="Uncategorized">Uncategorized</option>
             <option value="groceries">Groceries</option>
             <option value="household">Household</option>
             <option value="clothes">Clothes</option>
@@ -107,6 +105,20 @@ export default function AddItemsForm() {
         </label>
         <br />
 
+        <label>
+          Shopping Status:
+          <select
+            name="shoppingStatus"
+            value={formData.shoppingStatus}
+            onChange={handleChange}
+          >
+            <option value="None">None</option>
+            <option value="shopping">Shopping</option>
+            <option value="bought">Bought</option>
+          </select>
+        </label>
+        <br />
+        
         <input type="submit" />
       </form>
       <button onClick={handleClick}>Close Form</button>
