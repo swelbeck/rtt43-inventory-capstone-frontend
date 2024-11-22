@@ -45,3 +45,42 @@
 .item p {
   margin: 5px 0;
 }
+
+
+.shopping-list {
+  padding: 20px;
+}
+
+.categories {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.category {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 10px;
+  width: 250px;
+  background-color: #f9f9f9;
+}
+
+.category h3 {
+  text-align: center;
+}
+
+.category ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.category li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 5px 0;
+}
+
+button {
+  margin-left: 10px;
+}

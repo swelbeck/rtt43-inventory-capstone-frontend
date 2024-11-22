@@ -1,35 +1,40 @@
-import ItemRow from "./ItemRow";
-import ItemCategoryRow from "./ItemCategoryRow";
+// import ItemRow from "./ItemRow";
+// import ItemCategoryRow from "./ItemCategoryRow";
 
-function InventoryTable({ items, setInventory }) {
-  let rows = [];
-  let cat = null;
+// function InventoryTable({ items, setInventory }) {
+  
+//   // Create a set of unique categories
+//   const uniqueCategories = [...new Set(items.map((item) => item.category))];
 
-  items.forEach((el) => {
-    if (cat !== el.category) {
-      cat = el.category;
-      rows.push(
-        <ItemCategoryRow category={el.category} key={el.category} />
-      );
-    }
+//   return (
+//     <div>
+//       {uniqueCategories.map((category) => (
+//         <div key={category}>
+//           <h3>{category}</h3>
+//           <table>
+//             <thead>
+//               <tr>
+//                 <th>Name</th>
+//                 <th>Quantity</th>
+//                 <th>Actions</th>
+//               </tr>
+//             </thead>
+//             <tbody>
+//               {items
+//                 .filter((item) => item.category === category)
+//                 .map((filteredItem) => (
+//                   <ItemRow
+//                     item={filteredItem}
+//                     setInventory={setInventory}
+//                     key={filteredItem._id}
+//                   />
+//                 ))}
+//             </tbody>
+//           </table>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
 
-    rows.push(
-      <ItemRow item={el} setInventory={setInventory} key={el._id} />
-    );
-  });
-
-  return (
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Quantity</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>{rows}</tbody>
-    </table>
-  );
-}
-
-export default InventoryTable;
+// export default InventoryTable;

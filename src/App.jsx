@@ -1,11 +1,10 @@
-import { useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import Dashboard from "./pages/Dashboard";
 import Inventory from "./pages/Inventory";
 import Login from "./pages/Login";
 import ShoppingList from "./pages/ShoppingList";
 import NotFound from "./pages/NotFound";
-import AddItemsForm from "./components/AddItemsForm";
+import AddItemsForm from "./pages/AddItemsForm";
 import Nav from "./components/Nav";
 
 import "./App.css";

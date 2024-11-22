@@ -14,6 +14,12 @@ export default function inventoryReducer(state, action) {
           ? { ...item, name: action.payload.name }
           : item
       );
+    case ACTIONS.UPDATE_ITEM:
+      return state.map((item) =>
+        item.id === action.payload.id
+          ? action.payload
+          : item
+      );
     default:
       return state;
   }

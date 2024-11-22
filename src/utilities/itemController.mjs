@@ -48,6 +48,18 @@ async function updateItem(id, formData) {
   }
 }
 
+async function toggleShoppingListStatus(id) {
+  try {
+    let url = `http://localhost:3000/api/items/${id}/toggle-shopping`;
+
+    let res = await axios.put(url);
+
+    return res.data;
+  } catch (error) {
+    console.error("Error toggling shopping list", error);
+  }
+}
+
 async function findOneItem(id) {
   try {
     let url = `http://localhost:3000/api/items/${id}`;
@@ -77,6 +89,7 @@ export {
   createItem,
   deleteItem,
   updateItem,
+  toggleShoppingListStatus,
   findOneItem,
   findItemsByCategory,
 };

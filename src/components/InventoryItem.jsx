@@ -2,9 +2,19 @@ import { useContext } from "react";
 import { InventoryContext } from "../contexts/InventoryContext";
 import { deleteItem } from "../utilities/itemController.mjs";
 import ACTIONS from "../utilities/inventoryReducerActions.mjs";
+import { toggleShoppingListStatus } from "../utilities/itemController.mjs";
 
 export default function InventoryItem({ item }) {
   const { dispatch } = useContext(InventoryContext);
+
+  async function handleToggleShopping() {
+    try {
+      const updatedItem = await toggleShoppingListStatus(item._id);
+      dispatch({ type: ACTIONS.UPDATE_ITEM, payload: updatedItem });
+    } catch (error) {
+      console.error("Error updating shopping list status:", error);
+    }
+  }
 
   async function handleDelete() {
     try {
@@ -23,6 +33,11 @@ export default function InventoryItem({ item }) {
         <strong>{item.name}</strong>
       </p>
       <p>Quantity: {item.quantity}</p>
+      <button onClick={handleToggleShopping}>
+        {item.addedToShoppingList
+          ? "Remove from Shopping List"
+          : "Add to Shopping List"}
+      </button>
       <button onClick={handleDelete}>Delete</button>
     </div>
   );

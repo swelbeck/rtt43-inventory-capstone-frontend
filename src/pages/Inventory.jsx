@@ -1,34 +1,29 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { Link } from "react-router-dom";
-import { getInventory } from "../utilities/itemController.mjs";
-import InventoryTable from "../components/InventoryTable";
+import { InventoryContext } from "../contexts/InventoryContext";
+import InventoryCategory from "../components/InventoryCategory";
+import AddItemsForm from "./AddItemsForm";
 
 export default function Inventory() {
-  const [inventory, setInventory] = useState([]);
+  const { inventory } = useContext(InventoryContext);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const data = await getInventory();
-        setInventory(data);
-      } catch (error) {
-        console.error("Error fetching inventory:", error);
-      }
-    }
-
-    fetchData();
-  }, []);
+  // Group items by category
+  const categories = inventory.reduce((acc, item) => {
+    if (!acc[item.category]) acc[item.category] = [];
+    acc[item.category].push(item);
+    return acc;
+  }, {});
 
   return (
-    <div>
+    <div className="inventory-container">
       <h2>Your Inventory</h2>
-      <Link to={"/add-items"}>Add Items</Link>
-      {Object.keys(category).length > 0 ? (
+      <Link to={"/add-items"}>Add Item to Inventory</Link>
+      {Object.keys(categories).length > 0 ? (
         <div className="categories">
-          {Object.entries(category).map(([cat, items]) => (
+          {Object.entries(categories).map(([category, items]) => (
             <InventoryCategory
-              key={cat}
-              category={cat}
+              key={category}
+              category={category}
               items={items}
             />
           ))}
