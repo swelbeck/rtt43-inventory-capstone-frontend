@@ -1,11 +1,10 @@
-function SearchBar({ formData, setFormData }) {
-  function handleChange(e) {
+function SearchBar({ searchFormData, setSearchFormData }) {
 
-    setFormData({
-      ...formData,
+  function handleChange(e) {
+    setSearchFormData({
+      ...searchFormData,
       [e.target.name]: e.target.value,
     });
-
   }
 
   return (
@@ -15,10 +14,10 @@ function SearchBar({ formData, setFormData }) {
         onChange={handleChange}
         name="searchParams"
         type="text"
+        value={searchFormData.searchParams}
         placeholder="Search..."
       />
       <br />
-
     </form>
   );
 }

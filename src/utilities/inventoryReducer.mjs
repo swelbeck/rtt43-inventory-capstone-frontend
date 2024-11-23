@@ -5,7 +5,7 @@ export default function inventoryReducer(state, action) {
     case ACTIONS.SET_INVENTORY:
       return action.payload;
     case ACTIONS.ADD_ITEM:
-      // console.log("Adding item to state:", action.payload)
+
       return [...state, action.payload];
     case ACTIONS.DELETE_ITEM:
       return state.filter((item) => item._id !== action.payload);

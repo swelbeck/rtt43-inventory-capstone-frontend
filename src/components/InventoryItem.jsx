@@ -4,8 +4,12 @@ import { deleteItem } from "../utilities/itemController.mjs";
 import ACTIONS from "../utilities/inventoryReducerActions.mjs";
 import { toggleShoppingListStatus } from "../utilities/itemController.mjs";
 
-export default function InventoryItem({ item }) {
+export default function InventoryItem({ item, searchParams }) {
   const { dispatch } = useContext(InventoryContext);
+  // console.log(item)
+  // console.log(searchParams)
+
+
 
   async function handleToggleShopping() {
     try {
