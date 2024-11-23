@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { InventoryContext } from "../contexts/InventoryContext";
 import InventoryCategory from "../components/InventoryCategory";
 import SearchBar from "../components/SearchBar";
+import { findOneItem } from "../utilities/itemController.mjs";
 
 export default function Inventory() {
   const { inventory } = useContext(InventoryContext);
@@ -11,6 +12,7 @@ export default function Inventory() {
   const [searchFormData, setSearchFormData] = useState({
     searchParams: "",
   });
+  // const [detailWindow, setDetailWindow] = useState(null)
 
   // Group items by category
   const categories = inventory.reduce((acc, item) => {
@@ -53,6 +55,8 @@ export default function Inventory() {
   function handleFilterChange(e) {
     setFilteredCategory(e.target.value);
   }
+
+    
 
   return (
     <div className="inventory-container">

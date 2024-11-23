@@ -1,16 +1,19 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { InventoryContext } from "../contexts/InventoryContext";
-import { deleteItem } from "../utilities/itemController.mjs";
+// import { deleteItem } from "../utilities/itemController.mjs";
 import ACTIONS from "../utilities/inventoryReducerActions.mjs";
-import { toggleShoppingListStatus } from "../utilities/itemController.mjs";
+import {
+  toggleShoppingListStatus,
+  findOneItem,
+  deleteItem,
+} from "../utilities/itemController.mjs";
+import ItemDetails from "./ItemDetails.jsx";
 
-export default function InventoryItem({ item, searchParams }) {
+export default function InventoryItem({ item }) {
+  // const [detail, setItemDetail] = useState(null);
   const { dispatch } = useContext(InventoryContext);
+
   // console.log(item)
-  // console.log(searchParams)
-
-
-
   async function handleToggleShopping() {
     try {
       const updatedItem = await toggleShoppingListStatus(item._id);
@@ -31,13 +34,21 @@ export default function InventoryItem({ item, searchParams }) {
     }
   }
 
+
+
+  // function handleDetailWindowClose(e) {
+  //   if (e.target.className === "popup-overlay") {
+  //     setDetailWindow(null);
+  //   }
+  // }
+
   return (
     <div className="item">
       <p>
         <strong>{item.name}</strong>
       </p>
       <p>Quantity: {item.quantity}</p>
-      <button>Details</button>
+      <ItemDetails  item={item}/>
       <button onClick={handleToggleShopping}>
         {item.addedToShoppingList
           ? "Remove from Shopping List"

@@ -1,7 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createItem } from "../utilities/itemController.mjs";
-import { checkCategoryExists } from "../utilities/categoryController.mjs";
 import { InventoryContext } from "../contexts/InventoryContext";
 import ACTIONS from "../utilities/inventoryReducerActions.mjs";
 
@@ -41,8 +40,6 @@ export default function AddItemsForm() {
     e.preventDefault();
     try {
       const newItem = await createItem(formData);
-
-      console.log("New item from backend:", newItem);
 
       dispatch({ type: ACTIONS.ADD_ITEM, payload: newItem });
 
