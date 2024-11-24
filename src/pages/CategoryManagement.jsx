@@ -3,8 +3,8 @@ import {
   getAllCategories,
   createCategory,
   deleteCategory,
-  updateCategory,
-} from "../utilities/categoryController.mjs";
+  // updateCategory,
+} from "../utilities/api/categoryController.mjs";
 
 export default function CategoryManagement() {
   const [categories, setCategories] = useState([]);

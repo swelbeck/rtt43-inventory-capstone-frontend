@@ -1,8 +1,8 @@
 import { useReducer, useEffect } from "react";
 import { InventoryContext } from "./InventoryContext";
-import { getInventory } from "../utilities/itemController.mjs";
-import ACTIONS from "../utilities/inventoryReducerActions.mjs";
-import inventoryReducer from "../utilities/inventoryReducer.mjs";
+import { getInventory } from "../utilities/api/itemController.mjs";
+import ACTIONS from "../utilities/reducers/inventoryReducerActions.mjs";
+import inventoryReducer from "../utilities/reducers/inventoryReducer.mjs";
 
 export default function InventoryProvider({ children }) {
   const [inventory, dispatch] = useReducer(inventoryReducer, []);

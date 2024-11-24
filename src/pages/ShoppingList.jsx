@@ -3,8 +3,8 @@ import { InventoryContext } from "../contexts/InventoryContext";
 import {
   toggleShoppingListStatus,
   deleteItem,
-} from "../utilities/itemController.mjs";
-import ACTIONS from "../utilities/inventoryReducerActions.mjs";
+} from "../utilities/api/itemController.mjs";
+import ACTIONS from "../utilities/reducers/inventoryReducerActions.mjs";
 
 export default function ShoppingList() {
   const { inventory, dispatch } = useContext(InventoryContext);

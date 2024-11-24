@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
 import { InventoryContext } from "../../../contexts/InventoryContext.jsx";
-import ACTIONS from "../../../utilities/inventoryReducerActions.mjs";
+import ACTIONS from "../../../utilities/reducers/inventoryReducerActions.mjs";
 import {
   toggleShoppingListStatus,
   deleteItem,
-} from "../../../utilities/itemController.mjs"
+} from "../../../utilities/api/itemController.mjs";
 import ItemDetails from "../ItemDetails/ItemDetails.jsx";
 
 export default function InventoryItem({ item }) {
@@ -30,8 +30,6 @@ export default function InventoryItem({ item }) {
     }
   }
 
-
-
   // function handleDetailWindowClose(e) {
   //   if (e.target.className === "popup-overlay") {
   //     setDetailWindow(null);
@@ -44,7 +42,7 @@ export default function InventoryItem({ item }) {
         <strong>{item.name}</strong>
       </p>
       <p>Quantity: {item.quantity}</p>
-      <ItemDetails  item={item}/>
+      <ItemDetails item={item} />
       <button onClick={handleToggleShopping}>
         {item.addedToShoppingList
           ? "Remove from Shopping List"

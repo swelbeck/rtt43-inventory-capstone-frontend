@@ -7,6 +7,8 @@ export default function Nav() {
       {" | "}
       <Link to={"/inventory"}>Inventory</Link>
       {" | "}
+      <Link to={"/categories"}>Manage Categories</Link>
+      {" | "}
       <Link to={"/shopping-list"}>Shopping List</Link>
     </nav>
   );

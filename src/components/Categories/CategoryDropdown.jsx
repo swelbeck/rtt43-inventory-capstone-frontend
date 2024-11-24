@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import {
   getAllCategories,
   createCategory,
-} from "../../utilities/categoryController.mjs";
+} from "../../utilities/api/categoryController.mjs";
 
 export default function CategoryDropdown({
   selectedCategory,
