@@ -1,11 +1,11 @@
 import { useContext, useState } from "react";
-import { InventoryContext } from "../contexts/InventoryContext";
-import ACTIONS from "../utilities/inventoryReducerActions.mjs";
+import { InventoryContext } from "../../../contexts/InventoryContext.jsx";
+import ACTIONS from "../../../utilities/inventoryReducerActions.mjs";
 import {
   toggleShoppingListStatus,
   deleteItem,
-} from "../utilities/itemController.mjs";
-import ItemDetails from "./ItemDetails.jsx";
+} from "../../../utilities/itemController.mjs"
+import ItemDetails from "../ItemDetails/ItemDetails.jsx";
 
 export default function InventoryItem({ item }) {
   const { dispatch } = useContext(InventoryContext);

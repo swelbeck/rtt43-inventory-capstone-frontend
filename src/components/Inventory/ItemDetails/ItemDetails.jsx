@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { findOneItem } from "../utilities/itemController.mjs";
+import { findOneItem } from "../../../utilities/itemController.mjs";
 
 export default function ItemDetails({ item }) {
   const [itemDetails, setItemDetails] = useState(item);

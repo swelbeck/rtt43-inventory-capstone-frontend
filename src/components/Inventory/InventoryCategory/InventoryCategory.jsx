@@ -1,4 +1,4 @@
-import InventoryItem from "./InventoryItem";
+import InventoryItem from "../InventoryItem/InventoryItem";
 
 export default function InventoryCategory({ category, items }) {
   return (

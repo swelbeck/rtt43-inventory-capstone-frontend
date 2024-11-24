@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { InventoryContext } from "../contexts/InventoryContext";
-import InventoryCategory from "../components/InventoryCategory";
+import InventoryCategory from "../components/Inventory/InventoryCategory/InventoryCategory";
 import SearchBar from "../components/SearchBar";
 
 export default function Inventory() {
