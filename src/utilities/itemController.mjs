@@ -16,9 +16,7 @@ async function createItem(formData) {
   try {
     let url = "http://localhost:3000/api/items";
 
-  //  console.log("Sending POST request to:", url, "with data:", formData);
     let res = await axios.post(url, formData);
-// console.log("Response from backend:", res.data);
     return res.data;
   } catch (error) {
     console.error(error);
@@ -64,10 +62,8 @@ async function toggleShoppingListStatus(id) {
 async function findOneItem(id) {
   try {
     let url = `http://localhost:3000/api/items/${id}`;
-// console.log(`Fetching item details from: ${url}`);
 
     let res = await axios.get(url);
-// console.log("Item details fetched successfully:", res.data);
     return res.data;
   } catch (error) {
     console.error(error);

@@ -1,19 +1,15 @@
 import { useContext, useState } from "react";
 import { InventoryContext } from "../contexts/InventoryContext";
-// import { deleteItem } from "../utilities/itemController.mjs";
 import ACTIONS from "../utilities/inventoryReducerActions.mjs";
 import {
   toggleShoppingListStatus,
-  findOneItem,
   deleteItem,
 } from "../utilities/itemController.mjs";
 import ItemDetails from "./ItemDetails.jsx";
 
 export default function InventoryItem({ item }) {
-  // const [detail, setItemDetail] = useState(null);
   const { dispatch } = useContext(InventoryContext);
 
-  // console.log(item)
   async function handleToggleShopping() {
     try {
       const updatedItem = await toggleShoppingListStatus(item._id);
