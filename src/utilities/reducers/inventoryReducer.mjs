@@ -19,9 +19,19 @@ export default function inventoryReducer(state, action) {
           : item
       );
     case ACTIONS.UPDATE_CATEGORY:
-      return state.map((cat) =>
-        cat._id === action.payload._id ? { ...cat, ...action.payload } : cat
-      );
+      return state.map((item) => {
+        // Check if item belongs to the category being updated
+        if (item.category._id === action.payload._id) {
+          return {
+            ...item,
+            category: {
+              ...item.category,
+              name: action.payload.name,
+            },
+          };
+        }
+        return item;
+      });
     default:
       return state;
   }
