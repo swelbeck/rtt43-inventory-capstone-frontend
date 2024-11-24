@@ -12,7 +12,7 @@ export default function inventoryReducer(state, action) {
     case ACTIONS.EDIT_ITEM:
       return state.map((item) =>
         item._id === action.payload._id
-          ? { ...item, name: action.payload.name }
+          ? { ...item,  ...action.payload}
           : item
       );
     case ACTIONS.TOGGLE_SHOPPING_STATUS:

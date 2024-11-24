@@ -6,7 +6,7 @@ import SearchBar from "../components/SearchBar";
 
 export default function Inventory() {
   const { inventory } = useContext(InventoryContext);
-  const [filteredItems, setFilteredItems] = useState({});
+  const [filteredItems, setFilteredItems] = useState(categories);
   const [filteredCategory, setFilteredCategory] = useState("");
   const [searchFormData, setSearchFormData] = useState({
     searchParams: "",
