@@ -23,10 +23,10 @@ export default function AddItemsForm() {
   }
 
   function handleChange(e) {
-    if (e.target.name == "addedToShoppingList") {
+    if (e.target.type === "checkbox") {
       setFormData({
         ...formData,
-        stocked: !formData.addedToShoppingList,
+        [e.target.name]: e.target.checked,
       });
     } else {
       setFormData({
@@ -38,10 +38,16 @@ export default function AddItemsForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+
+    if (!formData.name) {
+      return;
+    }
+
     try {
       const newItem = await createItem(formData);
+      console.log("New Item Added:", newItem);
 
-      dispatch({ type: ACTIONS.ADD_ITEM, payload: newItem });
+      dispatch({ type: ACTIONS.ADD_ITEM, payload: newItem.newItem });
 
       nav("/inventory");
     } catch (error) {
@@ -69,7 +75,7 @@ export default function AddItemsForm() {
             <option value="groceries">Groceries</option>
             <option value="household">Household</option>
             <option value="clothes">Clothes</option>
-            <option value="clothes">Other</option>
+            <option value="other">Other</option>
           </select>
         </label>
         <br />
@@ -115,8 +121,7 @@ export default function AddItemsForm() {
           </select>
         </label>
         <br />
-        
-        <input type="submit" />
+        <input type="submit" value="Submit" />
       </form>
       <button onClick={handleClick}>Close Form</button>
     </div>

@@ -52,7 +52,7 @@ export default function InventoryItem({ item }) {
           ? "Remove from Shopping List"
           : "Add to Shopping List"}
       </button>
-      <Link to={"/edit-item"}>
+      <Link to={`/edit-item/${item._id}`}>
         <button>Edit</button>
       </Link>
       <button onClick={handleDelete}>Delete</button>

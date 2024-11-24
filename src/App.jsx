@@ -9,7 +9,7 @@ import AddItemsForm from "./pages/AddItemsForm";
 import EditItemsForm from "./pages/EditItemsForm";
 import ItemDetails from "./components/Inventory/ItemDetails/ItemDetails";
 import Nav from "./components/Nav";
-import { InventoryContext } from "./contexts/InventoryContext";
+
 
 import "./App.css";
 
@@ -22,7 +22,7 @@ function App() {
         <Route path="/inventory" element={<Inventory />} />
         <Route path="/categories" element={<CategoryManagement />} />
         <Route path="/add-items" element={<AddItemsForm />} />
-        <Route path="/edit-item" element={<EditItemsForm />} />
+        <Route path="/edit-item/:id" element={<EditItemsForm />} />
         <Route path="/item-details/:id" element={<ItemDetails />} />
         <Route path="/shopping-list" element={<ShoppingList />} />
         <Route path="*" element={<NotFound />} />
