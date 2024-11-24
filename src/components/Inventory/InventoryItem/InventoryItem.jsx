@@ -1,4 +1,5 @@
 import { useContext, useState } from "react";
+import { Link } from "react-router-dom";
 import { InventoryContext } from "../../../contexts/InventoryContext.jsx";
 import ACTIONS from "../../../utilities/reducers/inventoryReducerActions.mjs";
 import {
@@ -48,6 +49,7 @@ export default function InventoryItem({ item }) {
           ? "Remove from Shopping List"
           : "Add to Shopping List"}
       </button>
+      <Link to={"/edit-item"}>Edit</Link>
       <button onClick={handleDelete}>Delete</button>
     </div>
   );

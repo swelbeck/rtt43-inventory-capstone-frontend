@@ -5,6 +5,7 @@ import ShoppingList from "./pages/ShoppingList";
 import CategoryManagement from "./pages/CategoryManagement";
 import NotFound from "./pages/NotFound";
 import AddItemsForm from "./pages/AddItemsForm";
+import EditItemsForm from "./pages/EditItemsForm"
 import Nav from "./components/Nav";
 
 import "./App.css";
@@ -18,6 +19,7 @@ function App() {
         <Route path="/inventory" element={<Inventory />} />
         <Route path="/categories" element={<CategoryManagement />} />
         <Route path="/add-items" element={<AddItemsForm />} />
+        <Route path="/edit-item" element={<EditItemsForm />} />
         <Route path="/shopping-list" element={<ShoppingList />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

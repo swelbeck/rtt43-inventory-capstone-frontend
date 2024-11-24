@@ -51,7 +51,7 @@ export default function AddItemsForm() {
 
   return (
     <div>
-      <h2>Add Item to Inventory</h2>
+      <h2>Edit Item</h2>
       <form onSubmit={handleSubmit}>
         <label>
           Name: <input onChange={handleChange} type="text" name="name" />
@@ -115,7 +115,7 @@ export default function AddItemsForm() {
           </select>
         </label>
         <br />
-        
+
         <input type="submit" />
       </form>
       <button onClick={handleClick}>Close Form</button>
