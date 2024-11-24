@@ -1,18 +1,20 @@
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import { findOneItem } from "../../../utilities/api/itemController.mjs";
 
-export default function ItemDetails({ item }) {
-  const [itemDetails, setItemDetails] = useState(item);
+export default function ItemDetails() {
+  const [itemDetails, setItemDetails] = useState(null);
+  const { id } = useParams();
 
   useEffect(() => {
     async function getItemDetails() {
-      if (item?._id) {
-        const details = await findOneItem(item._id);
+      if (id) {
+        const details = await findOneItem(id);
         setItemDetails(details);
       }
     }
     getItemDetails();
-  }, [item]);
+  }, [id]);
 
   if (!itemDetails) {
     return <p>Loading item details...</p>;

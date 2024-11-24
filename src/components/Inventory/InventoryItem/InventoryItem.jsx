@@ -42,14 +42,19 @@ export default function InventoryItem({ item }) {
       <p>
         <strong>{item.name}</strong>
       </p>
+      <Link to={`/item-details/${item._id}`}>
+        <button>Details</button>
+      </Link>
       <p>Quantity: {item.quantity}</p>
-      <ItemDetails item={item} />
+
       <button onClick={handleToggleShopping}>
         {item.addedToShoppingList
           ? "Remove from Shopping List"
           : "Add to Shopping List"}
       </button>
-      <Link to={"/edit-item"}>Edit</Link>
+      <Link to={"/edit-item"}>
+        <button>Edit</button>
+      </Link>
       <button onClick={handleDelete}>Delete</button>
     </div>
   );
