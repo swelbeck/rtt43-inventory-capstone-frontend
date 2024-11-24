@@ -31,11 +31,10 @@ export default function InventoryItem({ item }) {
     }
   }
 
-  // function handleDetailWindowClose(e) {
-  //   if (e.target.className === "popup-overlay") {
-  //     setDetailWindow(null);
-  //   }
-  // }
+  const buttonText =
+    item.shoppingStatus === "shopping"
+      ? "Remove from Shopping List"
+      : "Add to Shopping List";
 
   return (
     <div className="item">
@@ -47,11 +46,7 @@ export default function InventoryItem({ item }) {
       </Link>
       <p>Quantity: {item.quantity}</p>
 
-      <button onClick={handleToggleShopping}>
-        {item.addedToShoppingList
-          ? "Remove from Shopping List"
-          : "Add to Shopping List"}
-      </button>
+      <button onClick={handleToggleShopping}>{buttonText}</button>
       <Link to={`/edit-item/${item._id}`}>
         <button>Edit</button>
       </Link>

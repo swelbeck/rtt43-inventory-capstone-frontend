@@ -41,6 +41,7 @@ export default function EditItemsForm() {
       setFormData({
         ...formData,
         [e.target.name]: e.target.checked,
+        shoppingStatus: e.target.checked ? "shopping" : "None",
       });
     } else {
       setFormData({
@@ -52,16 +53,23 @@ export default function EditItemsForm() {
 
   async function handleSubmit(e) {
     e.preventDefault();
-    
+
     if (!formData.name) {
       return;
     }
-    
+
     try {
       const updatedItem = await updateItem(id, formData);
-console.log("Updated Item:", updatedItem)
+      console.log("Updated Item:", updatedItem);
       dispatch({ type: ACTIONS.EDIT_ITEM, payload: updatedItem });
 
+      if (formData.addedToShoppingList) {
+        updatedItem.shoppingStatus = "shopping";
+        dispatch({
+          type: ACTIONS.TOGGLE_SHOPPING_STATUS,
+          payload: updatedItem,
+        });
+      }
       nav("/inventory");
     } catch (error) {
       console.error(error);
@@ -134,7 +142,7 @@ console.log("Updated Item:", updatedItem)
           <br />
 
           <label>
-            In Shopping List?:{" "}
+            Add to Shopping List?:{" "}
             <input
               onChange={handleChange}
               type="checkbox"

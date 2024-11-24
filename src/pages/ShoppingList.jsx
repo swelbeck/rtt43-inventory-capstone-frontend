@@ -13,6 +13,7 @@ export default function ShoppingList() {
   const shoppingList = inventory.filter(
     (item) => item.addedToShoppingList && item.shoppingStatus === "shopping"
   );
+  
   const boughtItems = inventory.filter(
     (item) => item.shoppingStatus === "bought"
   );

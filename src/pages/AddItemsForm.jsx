@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { createItem } from "../utilities/api/itemController.mjs";
 import { InventoryContext } from "../contexts/InventoryContext";
 import ACTIONS from "../utilities/reducers/inventoryReducerActions.mjs";
+import { createItem } from "../utilities/api/itemController.mjs";
 
 export default function AddItemsForm() {
   const nav = useNavigate();
@@ -27,6 +27,7 @@ export default function AddItemsForm() {
       setFormData({
         ...formData,
         [e.target.name]: e.target.checked,
+        shoppingStatus: e.target.checked ? "shopping" : "None",
       });
     } else {
       setFormData({
@@ -44,10 +45,18 @@ export default function AddItemsForm() {
     }
 
     try {
-      const newItem = await createItem(formData);
+      const newItem = await createItem({
+        ...formData,
+        shoppingStatus: formData.addedToShoppingList ? "shopping" : "None",
+      });
       console.log("New Item Added:", newItem);
 
       dispatch({ type: ACTIONS.ADD_ITEM, payload: newItem.newItem });
+
+      if (formData.addedToShoppingList) {
+        newItem.shoppingStatus = "shopping";
+        dispatch({ type: ACTIONS.TOGGLE_SHOPPING_STATUS, payload: newItem });
+      }
 
       nav("/inventory");
     } catch (error) {
@@ -99,7 +108,7 @@ export default function AddItemsForm() {
         <br />
 
         <label>
-          In Shopping List?:{" "}
+          Add to Shopping List?:{" "}
           <input
             onChange={handleChange}
             type="checkbox"
