@@ -9,7 +9,6 @@ import ACTIONS from "../../utilities/reducers/inventoryReducerActions.mjs";
 import ShoppingListItem from "../../components/ShoppingListItem/ShoppingListItem";
 import "./ShoppingList.css";
 
-
 export default function ShoppingList() {
   const { inventory, dispatch } = useContext(InventoryContext);
 
@@ -27,18 +26,18 @@ export default function ShoppingList() {
   );
 
   // Handle moving items between shopping and bought
-const moveItem = async (draggedItem, targetStatus) => {
-  if (!draggedItem._id) {
-    console.error("Dragged item missing _id:", draggedItem);
-    return;
-  }
+  const moveItem = async (draggedItem, targetStatus) => {
+    if (!draggedItem._id) {
+      console.error("Dragged item missing _id:", draggedItem);
+      return;
+    }
 
-  const updatedItem = await updateItem(draggedItem._id, {
-    shoppingStatus: targetStatus, // This will change the item’s status to either "shopping" or "bought"
-  });
+    const updatedItem = await updateItem(draggedItem._id, {
+      shoppingStatus: targetStatus, // This will change the item’s status to either "shopping" or "bought"
+    });
 
-  dispatch({ type: ACTIONS.TOGGLE_SHOPPING_STATUS, payload: updatedItem });
-};
+    dispatch({ type: ACTIONS.TOGGLE_SHOPPING_STATUS, payload: updatedItem });
+  };
 
   async function handleToggle(item) {
     try {
@@ -85,11 +84,19 @@ const moveItem = async (draggedItem, targetStatus) => {
   async function handleSave(editedItem) {
     try {
       const updatedItem = await updateItem(editedItem._id, editedItem);
-      if (success) {
-        dispatch({ type: ACTIONS.EDIT_ITEM, payload: updatedItem });
+      console.log("Updated Item:", updatedItem);
+      dispatch({ type: ACTIONS.EDIT_ITEM, payload: updatedItem });
+
+      if (editedItem.addedToShoppingList) {
+        // updatedItem.shoppingStatus = "shopping";
+        dispatch({
+          type: ACTIONS.ADD_ITEM_TO_SHOPPING_LIST,
+          payload: updatedItem,
+        });
       }
+
     } catch (error) {
-      console.error("Error deleting item:", error);
+      console.error("Error saving item:", error);
     }
   }
 
