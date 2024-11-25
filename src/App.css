@@ -30,7 +30,7 @@ a {
 button {
   cursor: pointer;
   border: none;
-  background-color: #4CAF50;
+  background-color: dodgerblue;
   color: white;
   padding: 10px 20px;
   border-radius: 5px;
@@ -38,7 +38,7 @@ button {
 }
 
 button:hover {
-  background-color: #45a049;
+  background-color: dodgerblue;
 }
 
 input,
@@ -56,6 +56,40 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: #4CAF50;
+  border-color: dodgerblue;
   outline: none;
+}
+
+/* Button with icons */
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Space between icon and text */
+  padding: 8px 16px;
+  font-size: 16px;
+  border-radius: 5px;
+  background-color: dodgerblue;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: dodgerblue;
+}
+
+button:focus {
+  outline: 2px solid dodgerblue;
+  outline-offset: 2px;
+}
+
+button svg {
+  font-size: 20px; /* Adjust icon size */
+}
+
+/* Optional: Icon buttons for better look */
+button {
+  padding: 10px;
+  width: auto;
+  height: 40px;
 }

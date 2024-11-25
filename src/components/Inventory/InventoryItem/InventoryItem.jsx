@@ -7,6 +7,8 @@ import {
   deleteItem,
 } from "../../../utilities/api/itemController.mjs";
 import "./InventoryItem.css";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
+
 
 export default function InventoryItem({ item }) {
   const { dispatch } = useContext(InventoryContext);
@@ -69,9 +71,14 @@ export default function InventoryItem({ item }) {
       )}
 
       <Link to={`/edit-item/${item._id}`}>
-        <button>Edit</button>
+        <button>
+          <FaEdit /> Edit
+        </button>
       </Link>
-      <button onClick={handleDelete}>Delete</button>
+      <button onClick={handleDelete}>
+        <FaTrashAlt />
+        Delete
+      </button>
     </div>
   );
 }

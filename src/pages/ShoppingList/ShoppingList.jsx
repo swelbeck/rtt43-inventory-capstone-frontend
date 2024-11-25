@@ -9,11 +9,13 @@ import ACTIONS from "../../utilities/reducers/inventoryReducerActions.mjs";
 import ShoppingListItem from "../../components/ShoppingListItem/ShoppingListItem";
 import "./ShoppingList.css";
 
+
 export default function ShoppingList() {
   const { inventory, dispatch } = useContext(InventoryContext);
-  useEffect(() => {
-    console.log("Inventory updated:", inventory);
-  }, [inventory]);
+
+  // useEffect(() => {
+  //   console.log("Inventory updated:", inventory);
+  // }, [inventory]);
 
   // Filter items into Shopping List and Bought
   const shoppingList = inventory.filter(
@@ -23,6 +25,21 @@ export default function ShoppingList() {
   const boughtItems = inventory.filter(
     (item) => item.shoppingStatus === "bought"
   );
+
+  // Handle moving items between shopping and bought
+const moveItem = async (draggedItem, targetStatus) => {
+  if (!draggedItem._id) {
+    console.error("Dragged item missing _id:", draggedItem);
+    return;
+  }
+
+  // Make sure the draggedItem has all the necessary properties (e.g., _id, name, shoppingStatus)
+  const updatedItem = await updateItem(draggedItem._id, {
+    shoppingStatus: targetStatus,
+  });
+
+  dispatch({ type: ACTIONS.TOGGLE_SHOPPING_STATUS, payload: updatedItem });
+};
 
   async function handleToggle(item) {
     try {
@@ -34,19 +51,19 @@ export default function ShoppingList() {
         payload: updatedItem,
       });
 
-      // If the item is marked as "shopping", set addedToShoppingList to true
-      if (updatedItem.shoppingStatus === "shopping") {
-        dispatch({
-          type: ACTIONS.ADD_ITEM_TO_SHOPPING_LIST,
-          payload: updatedItem,
-        });
-      } else {
-        // If the item is marked as "bought", set addedToShoppingList to false
-        dispatch({
-          type: ACTIONS.DELETE_ITEM_FROM_SHOPPING_LIST,
-          payload: updatedItem._id,
-        });
-      }
+      // // If the item is marked as "shopping", set addedToShoppingList to true
+      // if (updatedItem.shoppingStatus === "shopping") {
+      //   dispatch({
+      //     type: ACTIONS.ADD_ITEM_TO_SHOPPING_LIST,
+      //     payload: updatedItem,
+      //   });
+      // } else {
+      //   // If the item is marked as "bought", set addedToShoppingList to false
+      //   dispatch({
+      //     type: ACTIONS.DELETE_ITEM_FROM_SHOPPING_LIST,
+      //     payload: updatedItem._id,
+      //   });
+      // }
     } catch (error) {
       console.error("Error toggling shopping list status:", error);
     }
@@ -77,25 +94,25 @@ export default function ShoppingList() {
     }
   }
 
-  async function handleDelete(item) {
-    console.log(item);
-    try {
-      // Update Shopping Status to "None" in backend
-      const updatedItem = await updateItem(item._id, {
-        shoppingStatus: "None",
-      });
+  // async function handleDelete(item) {
+  //   console.log(item);
+  //   try {
+  //     // Update Shopping Status to "None" in backend
+  //     const updatedItem = await updateItem(item._id, {
+  //       shoppingStatus: "None",
+  //     });
 
-      dispatch({
-        type: ACTIONS.DELETE_ITEM_FROM_SHOPPING_LIST,
-        payload: item._id,
-      });
+  //     dispatch({
+  //       type: ACTIONS.DELETE_ITEM_FROM_SHOPPING_LIST,
+  //       payload: item._id,
+  //     });
 
-      const updatedInventory = await getInventory();
-      dispatch({ type: ACTIONS.SET_INVENTORY, payload: updatedInventory });
-    } catch (error) {
-      console.error("Error deleting item from shopping list:", error);
-    }
-  }
+  //     const updatedInventory = await getInventory();
+  //     dispatch({ type: ACTIONS.SET_INVENTORY, payload: updatedInventory });
+  //   } catch (error) {
+  //     console.error("Error deleting item from shopping list:", error);
+  //   }
+  // }
 
   return (
     <div className="shopping-list">
@@ -108,10 +125,11 @@ export default function ShoppingList() {
             <ShoppingListItem
               key={item._id}
               item={item}
+              moveItem={moveItem}
+              status="shopping"
               onSave={handleSave}
               onToggle={handleToggle}
               onRemove={handleRemoveFromShoppingList}
-              // onDelete={handleDelete}
             />
           ))}
         </ul>
@@ -124,10 +142,11 @@ export default function ShoppingList() {
             <ShoppingListItem
               key={item._id}
               item={item}
+              moveItem={moveItem}
+              status="bought"
               onSave={handleSave}
               onToggle={handleToggle}
               onRemove={handleRemoveFromShoppingList}
-              // onDelete={handleDelete}
             />
           ))}
         </ul>
