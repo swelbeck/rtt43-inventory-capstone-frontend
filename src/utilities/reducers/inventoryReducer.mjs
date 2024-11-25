@@ -18,10 +18,24 @@ export default function inventoryReducer(state, action) {
           ? { ...item, shoppingStatus: action.payload.shoppingStatus }
           : item
       );
+
+    case ACTIONS.ADD_ITEM_TO_SHOPPING_LIST:
+      return state.map((item) =>
+        item._id === action.payload._id
+          ? { ...item, addedToShoppingList: true }
+          : item
+      );
+
+    case ACTIONS.DELETE_ITEM_FROM_SHOPPING_LIST:
+      return state.map((item) =>
+        item._id === action.payload
+          ? { ...item, addedToShoppingList: false, shoppingStatus: "None" }
+          : item
+      );
+
     case ACTIONS.UPDATE_CATEGORY:
       return state.map((item) => {
-        // Check if item belongs to the category being updated
-        if (item.category._id === action.payload._id) {
+        if (item.category?._id === action.payload._id) {
           return {
             ...item,
             category: {

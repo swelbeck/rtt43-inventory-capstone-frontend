@@ -6,15 +6,34 @@ import {
   toggleShoppingListStatus,
   deleteItem,
 } from "../../../utilities/api/itemController.mjs";
-import ItemDetails from "../ItemDetails/ItemDetails.jsx";
 
 export default function InventoryItem({ item }) {
   const { dispatch } = useContext(InventoryContext);
 
-  async function handleToggleShopping() {
+  async function handleAddToShoppingList() {
     try {
       const updatedItem = await toggleShoppingListStatus(item._id);
       dispatch({ type: ACTIONS.TOGGLE_SHOPPING_STATUS, payload: updatedItem });
+    } catch (error) {
+      console.error("Error updating shopping list status:", error);
+    }
+  }
+
+  async function handleRemoveFromShoppingList() {
+    try {
+      const updatedItem = await toggleShoppingListStatus(item._id);
+
+      dispatch({
+        type: ACTIONS.DELETE_ITEM_FROM_SHOPPING_LIST,
+        payload: updatedItem._id,
+      });
+
+      // // Optionally update inventory state if needed 
+      // dispatch({
+      //   type: ACTIONS.SET_INVENTORY,
+      //   payload: updatedInventory, // Only if you need to sync inventory with the backend.
+      // });
+
     } catch (error) {
       console.error("Error updating shopping list status:", error);
     }
@@ -31,11 +50,6 @@ export default function InventoryItem({ item }) {
     }
   }
 
-  const buttonText =
-    item.shoppingStatus === "shopping"
-      ? "Remove from Shopping List"
-      : "Add to Shopping List";
-
   return (
     <div className="item">
       <p>
@@ -45,8 +59,14 @@ export default function InventoryItem({ item }) {
         <button>Details</button>
       </Link>
       <p>Quantity: {item.quantity}</p>
+      {item.shoppingStatus === "shopping" ? (
+        <button onClick={handleRemoveFromShoppingList}>
+          Remove from Shopping List
+        </button>
+      ) : (
+        <button onClick={handleAddToShoppingList}>Add to Shopping List</button>
+      )}
 
-      <button onClick={handleToggleShopping}>{buttonText}</button>
       <Link to={`/edit-item/${item._id}`}>
         <button>Edit</button>
       </Link>

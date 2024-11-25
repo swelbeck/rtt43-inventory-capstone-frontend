@@ -47,15 +47,19 @@ export default function AddItemsForm() {
     try {
       const newItem = await createItem({
         ...formData,
-        shoppingStatus: formData.addedToShoppingList ? "shopping" : "None",
+        shoppingStatus:
+          formData.shoppingStatus === "shopping" ? "shopping" : "None", // Ensure shoppingStatus is "shopping" if checkbox is checked
       });
+      
       console.log("New Item Added:", newItem);
 
       dispatch({ type: ACTIONS.ADD_ITEM, payload: newItem.newItem });
 
-      if (formData.addedToShoppingList) {
-        newItem.shoppingStatus = "shopping";
-        dispatch({ type: ACTIONS.TOGGLE_SHOPPING_STATUS, payload: newItem });
+      if (newItem.shoppingStatus === "shopping") {
+        dispatch({
+          type: ACTIONS.ADD_ITEM_TO_SHOPPING_LIST,
+          payload: newItem.newItem,
+        });
       }
 
       nav("/inventory");
@@ -91,19 +95,34 @@ export default function AddItemsForm() {
 
         <label>
           Quantity:{" "}
-          <input onChange={handleChange} type="number" name="quantity" />
+          <input
+            onChange={handleChange}
+            type="number"
+            name="quantity"
+            value={formData.quantity}
+          />
         </label>
         <br />
 
         <label>
           Date Purchased:{" "}
-          <input onChange={handleChange} type="date" name="datePurchased" />
+          <input
+            onChange={handleChange}
+            type="date"
+            name="datePurchased"
+            value={formData.datePurchased}
+          />
         </label>
         <br />
 
         <label>
           Reminder Date for Restock:{" "}
-          <input onChange={handleChange} type="date" name="reminderDate" />
+          <input
+            onChange={handleChange}
+            type="date"
+            name="reminderDate"
+            value={formData.reminderDate}
+          />
         </label>
         <br />
 
@@ -113,23 +132,11 @@ export default function AddItemsForm() {
             onChange={handleChange}
             type="checkbox"
             name="addedToShoppingList"
+            value={formData.addedToShoppingList}
           />
         </label>
         <br />
 
-        <label>
-          Shopping Status:
-          <select
-            name="shoppingStatus"
-            value={formData.shoppingStatus}
-            onChange={handleChange}
-          >
-            <option value="None">None</option>
-            <option value="shopping">Shopping</option>
-            <option value="bought">Bought</option>
-          </select>
-        </label>
-        <br />
         <input type="submit" value="Submit" />
       </form>
       <button onClick={handleClick}>Close Form</button>

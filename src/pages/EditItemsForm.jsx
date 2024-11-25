@@ -23,14 +23,17 @@ export default function EditItemsForm() {
     async function getData() {
       if (id) {
         const data = await findOneItem(id);
-        console.log(data); // For debugging purposes
-        setFormData(data); // Set form data with fetched item details
+        console.log(data);
+        setFormData({
+          ...data,
+          addedToShoppingList: data.shoppingStatus === "shopping",
+        });
       } else {
         console.error("Item ID is missing");
       }
     }
     getData();
-  }, [id]); // Use the `id` as dependency to trigger effect when it's available
+  }, [id]);
 
   function handleClick() {
     nav("/inventory");
@@ -41,7 +44,7 @@ export default function EditItemsForm() {
       setFormData({
         ...formData,
         [e.target.name]: e.target.checked,
-        shoppingStatus: e.target.checked ? "shopping" : "None",
+        shoppingStatus: e.target.checked ? "shopping" : "None", 
       });
     } else {
       setFormData({
@@ -66,7 +69,7 @@ export default function EditItemsForm() {
       if (formData.addedToShoppingList) {
         updatedItem.shoppingStatus = "shopping";
         dispatch({
-          type: ACTIONS.TOGGLE_SHOPPING_STATUS,
+          type: ACTIONS.ADD_ITEM_TO_SHOPPING_LIST,
           payload: updatedItem,
         });
       }
@@ -87,7 +90,7 @@ export default function EditItemsForm() {
               onChange={handleChange}
               type="text"
               name="name"
-              value={formData.name} // Bind name input to formData
+              value={formData.name} 
             />
           </label>
           <br />
@@ -97,7 +100,7 @@ export default function EditItemsForm() {
             <select
               onChange={handleChange}
               name="category"
-              value={formData.category} // Bind category select to formData.category
+              value={formData.category} 
             >
               <option value="Uncategorized">Uncategorized</option>
               <option value="groceries">Groceries</option>
@@ -114,7 +117,7 @@ export default function EditItemsForm() {
               onChange={handleChange}
               type="number"
               name="quantity"
-              value={formData.quantity} // Bind quantity input to formData.quantity
+              value={formData.quantity} 
             />
           </label>
           <br />
@@ -125,7 +128,7 @@ export default function EditItemsForm() {
               onChange={handleChange}
               type="date"
               name="datePurchased"
-              value={formData.datePurchased} // Bind datePurchased input to formData.datePurchased
+              value={formData.datePurchased} 
             />
           </label>
           <br />
@@ -136,7 +139,7 @@ export default function EditItemsForm() {
               onChange={handleChange}
               type="date"
               name="reminderDate"
-              value={formData.reminderDate} // Bind reminderDate input to formData.reminderDate
+              value={formData.reminderDate} 
             />
           </label>
           <br />
@@ -147,22 +150,8 @@ export default function EditItemsForm() {
               onChange={handleChange}
               type="checkbox"
               name="addedToShoppingList"
-              checked={formData.addedToShoppingList} // Use `checked` to bind checkbox
+              checked={formData.addedToShoppingList} 
             />
-          </label>
-          <br />
-
-          <label>
-            Shopping Status:
-            <select
-              name="shoppingStatus"
-              value={formData.shoppingStatus} // Bind shoppingStatus select to formData.shoppingStatus
-              onChange={handleChange}
-            >
-              <option value="None">None</option>
-              <option value="shopping">Shopping</option>
-              <option value="bought">Bought</option>
-            </select>
           </label>
           <br />
 
