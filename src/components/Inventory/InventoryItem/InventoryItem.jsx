@@ -5,7 +5,7 @@ import ACTIONS from "../../../utilities/reducers/inventoryReducerActions.mjs";
 import {
   toggleShoppingListStatus,
   deleteItem,
-  updateItem
+  updateItem,
 } from "../../../utilities/api/itemController.mjs";
 import "./InventoryItem.css";
 import {
@@ -38,7 +38,6 @@ export default function InventoryItem({ item }) {
         shoppingStatus: "None",
       });
       dispatch({ type: ACTIONS.TOGGLE_SHOPPING_STATUS, payload: updatedItem });
-
     } catch (error) {
       console.error("Error updating shopping list status:", error);
     }
@@ -55,39 +54,50 @@ export default function InventoryItem({ item }) {
     }
   }
 
-
   return (
     <div className="item">
-      <p>
-        <strong>{item.name}</strong>
-      </p>
-      <Link to={`/item-details/${item._id}`}>
-        <button title="View Details">
-          <FaInfoCircle />
-        </button>
-      </Link>
-      <p>Quantity: {item.quantity}</p>
-      {item.shoppingStatus === "shopping" ? (
-        <button
-          onClick={handleRemoveFromShoppingList}
-          title="Remove from Shopping List"
-        >
-          <FaMinusCircle />
-        </button>
-      ) : (
-        <button onClick={handleAddToShoppingList} title="Add to Shopping List">
-          <FaPlusCircle />
-        </button>
-      )}
+      <div className="item-name">
+        <p className="item-name">
+          <strong>{item.name}</strong>
+        </p>
+      </div>
 
-      <Link to={`/edit-item/${item._id}`}>
-        <button title="Edit Item">
-          <FaEdit />
+      <div className="item-quantity">
+        <p>Quantity: {item.quantity}</p>
+      </div>
+
+      <div className="item-icons">
+        <Link to={`/item-details/${item._id}`}>
+          <button title="View Details">
+            <FaInfoCircle />
+          </button>
+        </Link>
+
+        {item.shoppingStatus === "shopping" ? (
+          <button
+            onClick={handleRemoveFromShoppingList}
+            title="Remove from Shopping List"
+          >
+            <FaMinusCircle />
+          </button>
+        ) : (
+          <button
+            onClick={handleAddToShoppingList}
+            title="Add to Shopping List"
+          >
+            <FaPlusCircle />
+          </button>
+        )}
+
+        <Link to={`/edit-item/${item._id}`}>
+          <button title="Edit Item">
+            <FaEdit />
+          </button>
+        </Link>
+        <button onClick={handleDelete} title="Delete Item">
+          <FaTrashAlt />
         </button>
-      </Link>
-      <button onClick={handleDelete} title="Delete Item">
-        <FaTrashAlt />
-      </button>
+      </div>
     </div>
   );
 }

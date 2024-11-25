@@ -4,10 +4,12 @@
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   margin-bottom: 20px;
+  text-transform: capitalize;
 }
 
 h3 {
-  color: #4A7C59; /* Dark green for category headings */
+  color: #4A7C59;
+  font-size: 1.4em;
 }
 
 .items {

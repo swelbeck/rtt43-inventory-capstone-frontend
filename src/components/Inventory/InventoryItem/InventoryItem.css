@@ -1,33 +1,47 @@
 .item {
-  background-color: #C8D5B9;
-  padding: 15px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  justify-content: space-between; 
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin: 10px 0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  min-height: 150px;
 }
 
-.item p {
-  font-size: 16px;
-  margin-bottom: 10px;
+.item-details {
+  display: flex;
+  flex-direction: column; 
+  justify-content: space-between; 
+  flex-grow: 1; 
 }
 
-.item button {
-  background-color: transparent; /* Make the button transparent */
+.item-name {
+  font-size: 1.1em;
+  margin-bottom: 5px; 
+}
+
+.item-quantity {
+  font-size: 1em;
+  margin-bottom: 5px; 
+}
+
+.item-icons {
+  display: flex;
+  justify-content: space-between; 
+  margin-top: 5px; 
+  margin-bottom: 10px; 
+}
+
+.item-icons button {
+  background: none;
   border: none;
   padding: 5px;
   cursor: pointer;
-  font-size: 18px;
-  color: #4A7C59; /* Dark green for icon color */
-  margin-left: 10px;
+  font-size: 1.5em;
 }
 
-.item button:hover {
-  color: #68B0AB; /* Change to teal on hover */
-}
-
-.item button:focus {
-  outline: none; /* Remove outline */
+.item-icons button:hover {
+  color: #007bff; 
 }
