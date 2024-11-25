@@ -1,0 +1,33 @@
+/* Form container */
+form {
+  width: 100%;
+  max-width: 600px; /* Optional: Limit max width for better control */
+  margin: 0 auto; /* Center the form */
+  padding: 10px;
+}
+
+/* Input field should take up full width of the container */
+input[type="text"] {
+  width: 100%; /* Make the input take full width of the container */
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #8FC0A9; /* Muted teal border */
+  font-size: 16px;
+  box-sizing: border-box; /* Include padding and border inside the width */
+}
+
+/* Button styles */
+button {
+  background-color: #8FC0A9; /* Muted teal */
+  color: #FAF3DD; /* Light cream */
+  padding: 12px;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 15px;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #68B0AB; /* Darker teal on hover */
+}

@@ -1,18 +1,19 @@
-/* Ensuring that the form container is constrained */
+/* Ensure the form is constrained */
 form.search-bar-form {
   width: 100%;
-  max-width: 600px; /* Optional: limit the width to a max value */
-  margin: 0 auto; /* Centering the form */
+  max-width: 600px; /* Optional: Limit max width for better control */
+  margin: 0 auto; /* Center the form */
   padding: 10px;
 }
 
-/* Ensuring the input takes the full width of the form */
+/* Input fields should take up 100% width of the container */
 form.search-bar-form input[type="text"] {
   width: 100%;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #8FC0A9; /* Muted teal border */
   font-size: 16px;
+  box-sizing: border-box; /* Ensures padding and border are included in width */
 }
 
 /* Focus effect for input */

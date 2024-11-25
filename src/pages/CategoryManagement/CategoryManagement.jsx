@@ -9,6 +9,7 @@ import { InventoryContext } from "../../contexts/InventoryContext";
 import CategoryForm from "../../components/Categories/CategoryForm";
 import CategoryList from "../../components/Categories/CategoryList";
 import ACTIONS from "../../utilities/reducers/inventoryReducerActions.mjs";
+import "./CategoryManagement.css";
 
 export default function CategoryManagement() {
   const [categories, setCategories] = useState([]);
