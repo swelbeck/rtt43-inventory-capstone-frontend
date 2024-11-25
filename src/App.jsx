@@ -1,15 +1,14 @@
 import { useContext } from "react";
 import { Routes, Route } from "react-router-dom";
-import Dashboard from "./pages/Dashboard";
-import Inventory from "./pages/Inventory";
-import ShoppingList from "./pages/ShoppingList";
-import CategoryManagement from "./pages/CategoryManagement";
-import NotFound from "./pages/NotFound";
-import AddItemsForm from "./pages/AddItemsForm";
-import EditItemsForm from "./pages/EditItemsForm";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Inventory from "./pages/Inventory/Inventory";
+import ShoppingList from "./pages/ShoppingList/ShoppingList";
+import CategoryManagement from "./pages/CategoryManagement/CategoryManagement";
+import NotFound from "./pages/NotFound/NotFound";
+import AddItemsForm from "./pages/AddItemsForm/AddItemsForm";
+import EditItemsForm from "./pages/EditItemsForm/EditItemsForm";
 import ItemDetails from "./components/Inventory/ItemDetails/ItemDetails";
-import Nav from "./components/Nav";
-
+import Nav from "./components/Nav/Nav";
 
 import "./App.css";
 

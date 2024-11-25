@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { InventoryContext } from "../contexts/InventoryContext";
-import ACTIONS from "../utilities/reducers/inventoryReducerActions.mjs";
-import { createItem } from "../utilities/api/itemController.mjs";
+import { InventoryContext } from "../../contexts/InventoryContext";
+import ACTIONS from "../../utilities/reducers/inventoryReducerActions.mjs";
+import { createItem } from "../../utilities/api/itemController.mjs";
 
 export default function AddItemsForm() {
   const nav = useNavigate();

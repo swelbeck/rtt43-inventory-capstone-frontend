@@ -1,13 +1,12 @@
 import { useContext, useEffect } from "react";
-import { InventoryContext } from "../contexts/InventoryContext";
+import { InventoryContext } from "../../contexts/InventoryContext";
 import {
   toggleShoppingListStatus,
   getInventory,
-  deleteItem,
   updateItem,
-} from "../utilities/api/itemController.mjs";
-import ACTIONS from "../utilities/reducers/inventoryReducerActions.mjs";
-import ShoppingListItem from "../components/ShoppingList/ShoppingListItem";
+} from "../../utilities/api/itemController.mjs";
+import ACTIONS from "../../utilities/reducers/inventoryReducerActions.mjs";
+import ShoppingListItem from "../../components/ShoppingList/ShoppingListItem";
 
 export default function ShoppingList() {
   const { inventory, dispatch } = useContext(InventoryContext);

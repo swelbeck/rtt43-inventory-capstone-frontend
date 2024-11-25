@@ -1,8 +1,8 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { findOneItem, updateItem } from "../utilities/api/itemController.mjs";
-import { InventoryContext } from "../contexts/InventoryContext";
-import ACTIONS from "../utilities/reducers/inventoryReducerActions.mjs";
+import { findOneItem, updateItem } from "../../utilities/api/itemController.mjs";
+import { InventoryContext } from "../../contexts/InventoryContext";
+import ACTIONS from "../../utilities/reducers/inventoryReducerActions.mjs";
 
 export default function EditItemsForm() {
   const nav = useNavigate();
