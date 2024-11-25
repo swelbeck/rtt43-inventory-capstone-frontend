@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import "./CategoryForm.css";
 
-export default function CategoryForm({ onSubmit, categoryToEdit }) {
+export default function CategoryForm({
+  onSubmit,
+  categoryToEdit,
+  existingCategories,
+}) {
   const [categoryName, setCategoryName] = useState("");
+  const [isDuplicate, setIsDuplicate] = useState(false);
 
   useEffect(() => {
     console.log(categoryToEdit);

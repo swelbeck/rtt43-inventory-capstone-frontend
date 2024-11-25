@@ -1,6 +1,6 @@
 import { useState } from "react";
-import { useDrag, useDrop } from "react-dnd"; 
-import { FaTrashAlt, FaEdit } from "react-icons/fa"; 
+import { useDrag, useDrop } from "react-dnd";
+import { FaTrashAlt, FaEdit } from "react-icons/fa";
 import "./ShoppingListItem.css";
 
 const ITEM_TYPE = "ITEM";
@@ -15,6 +15,8 @@ export default function ShoppingListItem({
 }) {
   const [isEditing, setIsEditing] = useState(false);
   const [editedItem, setEditedItem] = useState({ ...item });
+  const [isChecked, setIsChecked] = useState(item.shoppingStatus === "bought");
+  const [purchaseDate, setPurchaseDate] = useState(item.purchaseDate || "");
 
   // Setup drag hook
   const [{ isDragging }, drag] = useDrag({
@@ -26,16 +28,16 @@ export default function ShoppingListItem({
   });
 
   // Setup drop hook
- const [, drop] = useDrop({
-   accept: ITEM_TYPE,
-   drop: (draggedItem) => {
-     if (draggedItem.status !== status) {
-       const newStatus =
-         draggedItem.status === "shopping" ? "bought" : "shopping"; // Reverse the status when dropped
-       moveItem(draggedItem, newStatus); // Call moveItem with new status
-     }
-   },
- });
+  const [, drop] = useDrop({
+    accept: ITEM_TYPE,
+    drop: (draggedItem) => {
+      if (draggedItem.status !== status) {
+        const newStatus =
+          draggedItem.status === "shopping" ? "bought" : "shopping"; // Reverse the status when dropped
+        moveItem(draggedItem, newStatus); // Call moveItem with new status
+      }
+    },
+  });
 
   function handleChange(e) {
     setEditedItem((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -52,6 +54,18 @@ export default function ShoppingListItem({
 
   function handleRemove() {
     onRemove(item);
+  }
+
+  function handleCheckboxChange() {
+    setIsChecked(!isChecked);
+    // Set purchase date when checked
+    setPurchaseDate(isChecked ? "" : new Date().toISOString().split("T")[0]);
+    onToggle(item);
+  }
+
+  function handleDateChange(e) {
+    setPurchaseDate(e.target.value);
+    setEditedItem({ ...editedItem, purchaseDate: e.target.value });
   }
 
   return (
@@ -83,16 +97,29 @@ export default function ShoppingListItem({
           <p>
             {item.name} - {item.quantity}
           </p>
-          <button onClick={() => setIsEditing(true)}>Edit</button>
+          <button onClick={() => setIsEditing(true)} title="Edit">
+            <FaEdit />
+          </button>
         </>
       )}
 
-      <button onClick={handleRemove}>
-        <FaTrashAlt /> Remove
+      <input
+        type="checkbox"
+        checked={isChecked}
+        onChange={handleCheckboxChange}
+      />
+      {isChecked && (
+        <div>
+          <label>Purchase Date: </label>
+          <input type="date" value={purchaseDate} onChange={handleDateChange} />
+        </div>
+      )}
+      <button onClick={handleRemove} title="Remove">
+        <FaTrashAlt />
       </button>
 
-      <button onClick={handleToggle}>
-        <FaEdit /> Toggle
+      <button onClick={handleToggle} title="Toggle">
+        Toggle
       </button>
     </div>
   );

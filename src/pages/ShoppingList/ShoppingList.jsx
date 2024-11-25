@@ -2,7 +2,6 @@ import { useContext, useEffect } from "react";
 import { InventoryContext } from "../../contexts/InventoryContext";
 import {
   toggleShoppingListStatus,
-  getInventory,
   updateItem,
 } from "../../utilities/api/itemController.mjs";
 import ACTIONS from "../../utilities/reducers/inventoryReducerActions.mjs";
@@ -29,7 +28,9 @@ export default function ShoppingList() {
     }
 
     const updatedItem = await updateItem(draggedItem._id, {
-      shoppingStatus: targetStatus, // This will change the item’s status to either "shopping" or "bought"
+      // This will change the item’s status to either "shopping" or "bought"
+      shoppingStatus: targetStatus,
+      purchaseDate: draggedItem.purchaseDate,
     });
 
     dispatch({ type: ACTIONS.TOGGLE_SHOPPING_STATUS, payload: updatedItem });
