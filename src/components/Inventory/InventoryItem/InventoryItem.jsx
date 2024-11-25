@@ -6,6 +6,7 @@ import {
   toggleShoppingListStatus,
   deleteItem,
 } from "../../../utilities/api/itemController.mjs";
+import "./InventoryItem.css";
 
 export default function InventoryItem({ item }) {
   const { dispatch } = useContext(InventoryContext);

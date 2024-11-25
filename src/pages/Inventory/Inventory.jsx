@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import { InventoryContext } from "../../contexts/InventoryContext";
 import InventoryCategory from "../../components/Inventory/InventoryCategory/InventoryCategory";
 import SearchBar from "../../components/SearchBar/SearchBar";
+import "./Inventory.css";
 
 export default function Inventory() {
   const { inventory } = useContext(InventoryContext);

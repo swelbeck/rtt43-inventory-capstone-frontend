@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./ShoppingListItem.css";
 
 export default function ShoppingListItem({ item, onSave, onToggle, onRemove }) {
   const [isEditing, setIsEditing] = useState(false);
@@ -13,13 +14,13 @@ export default function ShoppingListItem({ item, onSave, onToggle, onRemove }) {
     setIsEditing(false);
   }
 
-function handleToggle() {
-  onToggle(item)
-}
+  function handleToggle() {
+    onToggle(item);
+  }
 
-function handleRemove() {
-  onRemove(item);
-}
+  function handleRemove() {
+    onRemove(item);
+  }
 
   return (
     <div className="item">
@@ -50,7 +51,7 @@ function handleRemove() {
       <input
         type="checkbox"
         checked={item.shoppingStatus === "bought"}
-        onChange={handleToggle} 
+        onChange={handleToggle}
       />
       <span>
         {item.shoppingStatus === "bought"

@@ -6,7 +6,8 @@ import {
   updateItem,
 } from "../../utilities/api/itemController.mjs";
 import ACTIONS from "../../utilities/reducers/inventoryReducerActions.mjs";
-import ShoppingListItem from "../../components/ShoppingList/ShoppingListItem";
+import ShoppingListItem from "../../components/ShoppingListItem/ShoppingListItem";
+import "./ShoppingList.css";
 
 export default function ShoppingList() {
   const { inventory, dispatch } = useContext(InventoryContext);
