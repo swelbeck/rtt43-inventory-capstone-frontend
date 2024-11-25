@@ -12,8 +12,10 @@ export default function AddItemsForm() {
     name: "",
     category: "Uncategorized",
     quantity: 1,
-    datePurchased: Date.now(),
-    reminderDate: Date.now() + 7,
+    datePurchased: new Date().toISOString().split("T")[0], // Format as yyyy-MM-dd
+    reminderDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
+      .toISOString()
+      .split("T")[0], // 7 days later, formatted as yyyy-MM-dd
     addedToShoppingList: false,
     shoppingStatus: "None",
   });
@@ -44,11 +46,16 @@ export default function AddItemsForm() {
       return;
     }
 
+    const formDataWithDates = {
+      ...formData,
+      reminderDate: new Date(formData.reminderDate), 
+    };
+
     try {
       const newItem = await createItem({
-        ...formData,
+        ...formDataWithDates,
         shoppingStatus:
-          formData.shoppingStatus === "shopping" ? "shopping" : "None", // Ensure shoppingStatus is "shopping" if checkbox is checked
+          formDataWithDates.shoppingStatus === "shopping" ? "shopping" : "None", // Ensure shoppingStatus is "shopping" if checkbox is checked
       });
       
       console.log("New Item Added:", newItem);
@@ -132,7 +139,7 @@ export default function AddItemsForm() {
             onChange={handleChange}
             type="checkbox"
             name="addedToShoppingList"
-            value={formData.addedToShoppingList}
+            checked={formData.addedToShoppingList}
           />
         </label>
         <br />

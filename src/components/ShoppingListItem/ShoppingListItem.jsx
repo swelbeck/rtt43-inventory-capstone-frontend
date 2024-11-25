@@ -33,8 +33,8 @@ export default function ShoppingListItem({
    drop: (draggedItem) => {
      if (draggedItem.status !== status) {
        const newStatus =
-         draggedItem.status === "shopping" ? "bought" : "shopping";
-       moveItem(draggedItem, newStatus); // Pass the full draggedItem object
+         draggedItem.status === "shopping" ? "bought" : "shopping"; // Reverse the status when dropped
+       moveItem(draggedItem, newStatus); // Call moveItem with new status
      }
    },
  });

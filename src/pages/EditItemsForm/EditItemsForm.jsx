@@ -26,6 +26,12 @@ export default function EditItemsForm() {
         console.log(data);
         setFormData({
           ...data,
+          datePurchased: new Date(data.datePurchased)
+            .toISOString()
+            .split("T")[0], // Format to yyyy-MM-dd
+          reminderDate: data.reminderDate
+            ? new Date(data.reminderDate).toISOString().split("T")[0] // Format reminderDate
+            : "",
           addedToShoppingList: data.shoppingStatus === "shopping",
         });
       } else {
@@ -62,7 +68,11 @@ export default function EditItemsForm() {
     }
 
     try {
-      const updatedItem = await updateItem(id, formData);
+      // Ensure reminderDate is a valid Date object
+      const updatedItem = await updateItem(id, {
+        ...formData,
+        reminderDate: new Date(formData.reminderDate), // Make sure reminderDate is a Date object
+      });
       console.log("Updated Item:", updatedItem);
       dispatch({ type: ACTIONS.EDIT_ITEM, payload: updatedItem });
 
@@ -73,9 +83,10 @@ export default function EditItemsForm() {
           payload: updatedItem,
         });
       }
+
       nav("/inventory");
     } catch (error) {
-      console.error(error);
+      console.error("Error updating item:", error);
     }
   }
 

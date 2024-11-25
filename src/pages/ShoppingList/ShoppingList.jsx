@@ -33,9 +33,8 @@ const moveItem = async (draggedItem, targetStatus) => {
     return;
   }
 
-  // Make sure the draggedItem has all the necessary properties (e.g., _id, name, shoppingStatus)
   const updatedItem = await updateItem(draggedItem._id, {
-    shoppingStatus: targetStatus,
+    shoppingStatus: targetStatus, // This will change the item’s status to either "shopping" or "bought"
   });
 
   dispatch({ type: ACTIONS.TOGGLE_SHOPPING_STATUS, payload: updatedItem });
