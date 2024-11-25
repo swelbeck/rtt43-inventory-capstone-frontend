@@ -1,16 +1,37 @@
-.shopping-list {
+.shopping-list-container {
+  display: flex;
+  flex-direction: column;
   padding: 20px;
 }
 
-.category h3 {
-  color: #4A7C59; /* Dark green for category headings */
+.shopping-list-title {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 20px; 
+  font-size: 1.5em; 
+  font-weight: bold; 
+}
+
+.shopping-list {
+  display: flex;
+  justify-content: space-between; 
+  gap: 20px; 
+  width: 100%; 
 }
 
 .category {
-  margin-bottom: 20px;
+  flex: 1; 
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.category ul {
+.category h3 {
+  text-align: center;
+}
+
+ul {
   list-style-type: none;
   padding: 0;
 }

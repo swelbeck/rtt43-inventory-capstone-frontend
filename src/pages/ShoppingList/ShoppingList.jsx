@@ -88,41 +88,45 @@ export default function ShoppingList() {
   }
 
   return (
-    <div className="shopping-list">
-      <h2>Shopping List</h2>
-
-      <div className="category">
-        <h3>Shopping</h3>
-        <ul>
-          {shoppingList.map((item) => (
-            <ShoppingListItem
-              key={item._id}
-              item={item}
-              moveItem={moveItem}
-              status="shopping"
-              onSave={handleSave}
-              onToggle={handleToggle}
-              onRemove={handleRemoveFromShoppingList}
-            />
-          ))}
-        </ul>
+    <div className="shopping-list-container">
+      <div className="shopping-list-title">
+        <h2>Shopping List</h2>
       </div>
 
-      <div className="category">
-        <h3>Bought</h3>
-        <ul>
-          {boughtItems.map((item) => (
-            <ShoppingListItem
-              key={item._id}
-              item={item}
-              moveItem={moveItem}
-              status="bought"
-              onSave={handleSave}
-              onToggle={handleToggle}
-              onRemove={handleRemoveFromShoppingList}
-            />
-          ))}
-        </ul>
+      <div className="shopping-list">
+        <div className="category">
+          <h3>Shopping</h3>
+          <ul>
+            {shoppingList.map((item) => (
+              <ShoppingListItem
+                key={item._id}
+                item={item}
+                moveItem={moveItem}
+                status="shopping"
+                onSave={handleSave}
+                onToggle={handleToggle}
+                onRemove={handleRemoveFromShoppingList}
+              />
+            ))}
+          </ul>
+        </div>
+
+        <div className="category">
+          <h3>Bought</h3>
+          <ul>
+            {boughtItems.map((item) => (
+              <ShoppingListItem
+                key={item._id}
+                item={item}
+                moveItem={moveItem}
+                status="bought"
+                onSave={handleSave}
+                onToggle={handleToggle}
+                onRemove={handleRemoveFromShoppingList}
+              />
+            ))}
+          </ul>
+        </div>
       </div>
     </div>
   );

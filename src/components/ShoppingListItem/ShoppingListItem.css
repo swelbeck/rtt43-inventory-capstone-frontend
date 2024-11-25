@@ -1,23 +1,54 @@
 .item {
-  background-color: #C8D5B9;
-  padding: 15px;
-  border-radius: 8px;
-  margin-bottom: 15px;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 10px;
+  border: 1px solid #ddd;
+  margin: 10px 0;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  height: auto;
 }
 
-button {
-  background-color: #8FC0A9;
+.item-details {
+  display: flex; 
+  align-items: center; 
+  gap: 10px; 
+  margin-bottom: 10px; 
+}
+
+.item-checkbox {
+  margin-right: 10px; 
+}
+
+.item-name {
+  font-size: 1.2em;
+}
+
+.purchase-date {
+  margin-top: 10px;
+}
+
+.item-icons {
+  display: flex;
+  justify-content: space-evenly; 
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.item-icons button {
+  background: none;
   border: none;
-  padding: 8px 12px;
-  font-size: 14px;
+  padding: 5px;
   cursor: pointer;
-  border-radius: 5px;
+  font-size: 1.5em;
+  color: #333; 
 }
 
-button:hover {
-  background-color: #68B0AB;
+.item-icons button:hover {
+  color: #007bff;
+}
+
+.item-icons button:focus {
+  outline: none; 
 }

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
-import { FaTrashAlt, FaEdit } from "react-icons/fa";
+import { FaTrashAlt, FaEdit, FaExchangeAlt } from "react-icons/fa";
 import "./ShoppingListItem.css";
 
 const ITEM_TYPE = "ITEM";
@@ -21,7 +21,7 @@ export default function ShoppingListItem({
   // Setup drag hook
   const [{ isDragging }, drag] = useDrag({
     type: ITEM_TYPE,
-    item: { ...item, status }, 
+    item: { ...item, status },
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -100,34 +100,41 @@ export default function ShoppingListItem({
           <button onClick={handleSave}>Save</button>
         </>
       ) : (
-        <>
-          <p>
+        <div className="item-details">
+          {item.shoppingStatus === "shopping" && (
+            <input
+              type="checkbox"
+              checked={isChecked}
+              onChange={handleCheckboxChange}
+              className="item-checkbox"
+            />
+          )}
+          <p className="item-name">
             {item.name} - {item.quantity}
           </p>
-          <button onClick={() => setIsEditing(true)} title="Edit">
-            <FaEdit />
-          </button>
-        </>
+        </div>
       )}
 
-      <input
-        type="checkbox"
-        checked={isChecked}
-        onChange={handleCheckboxChange}
-      />
       {isChecked && (
-        <div>
+        <div className="purchase-date">
           <label>Purchase Date: </label>
           <input type="date" value={purchaseDate} onChange={handleDateChange} />
         </div>
       )}
-      <button onClick={handleRemove} title="Remove">
-        <FaTrashAlt />
-      </button>
 
-      <button onClick={handleToggle} title="Toggle">
-        Toggle
-      </button>
+      <div className="item-icons">
+        <button onClick={() => setIsEditing(true)} title="Edit">
+          <FaEdit />
+        </button>
+
+        <button onClick={handleRemove} title="Remove">
+          <FaTrashAlt />
+        </button>
+
+        <button onClick={handleToggle} title="Toggle">
+          <FaExchangeAlt />
+        </button>
+      </div>
     </div>
   );
 }
