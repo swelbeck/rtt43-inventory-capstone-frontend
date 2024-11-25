@@ -67,14 +67,19 @@ export default function ShoppingList() {
 
   async function handleSave(editedItem) {
     try {
-      const updatedItem = await updateItem(editedItem._id, editedItem);
-      // console.log("Updated Item:", updatedItem);
-      dispatch({ type: ACTIONS.EDIT_ITEM, payload: updatedItem });
+      // Only update the backend for "bought" items
+      if (editedItem.shoppingStatus === "bought") {
+        const updatedItem = await updateItem(editedItem._id, editedItem);
+        dispatch({ type: ACTIONS.EDIT_ITEM, payload: updatedItem });
+      } else {
+        // For "shopping" items, just update the local state
+        dispatch({ type: ACTIONS.EDIT_ITEM, payload: editedItem });
+      }
 
       if (editedItem.addedToShoppingList) {
         dispatch({
           type: ACTIONS.ADD_ITEM_TO_SHOPPING_LIST,
-          payload: updatedItem,
+          payload: editedItem,
         });
       }
     } catch (error) {

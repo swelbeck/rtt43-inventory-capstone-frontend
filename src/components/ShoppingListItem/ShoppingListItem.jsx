@@ -21,7 +21,7 @@ export default function ShoppingListItem({
   // Setup drag hook
   const [{ isDragging }, drag] = useDrag({
     type: ITEM_TYPE,
-    item: { ...item, status }, // Spread the entire item object, not just the id and status
+    item: { ...item, status }, 
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
@@ -44,7 +44,14 @@ export default function ShoppingListItem({
   }
 
   function handleSave() {
-    onSave(editedItem);
+    // For "shopping" status, we don't update the database, just the local state
+    if (status === "shopping") {
+      // If the item is in shopping list, save only locally
+      onSave(editedItem);
+    } else if (status === "bought") {
+      // If the item is bought, update it in the database
+      onSave(editedItem);
+    }
     setIsEditing(false);
   }
 
