@@ -1,6 +1,9 @@
 import { useContext, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { findOneItem, updateItem } from "../../utilities/api/itemController.mjs";
+import {
+  findOneItem,
+  updateItem,
+} from "../../utilities/api/itemController.mjs";
 import { InventoryContext } from "../../contexts/InventoryContext";
 import ACTIONS from "../../utilities/reducers/inventoryReducerActions.mjs";
 
@@ -11,7 +14,7 @@ export default function EditItemsForm() {
 
   const [formData, setFormData] = useState({
     name: "",
-    category: "Uncategorized",
+    category: "uncategorized",
     quantity: 1,
     datePurchased: "",
     reminderDate: "",
@@ -23,7 +26,7 @@ export default function EditItemsForm() {
     async function getData() {
       if (id) {
         const data = await findOneItem(id);
-        console.log(data);
+        // console.log(data);
         setFormData({
           ...data,
           datePurchased: new Date(data.datePurchased)
@@ -34,6 +37,10 @@ export default function EditItemsForm() {
             : "",
           addedToShoppingList: data.shoppingStatus === "shopping",
         });
+
+        // check for duplicates
+        const allItems = await getInventory();
+        setExistingItems(allItems);
       } else {
         console.error("Item ID is missing");
       }
@@ -50,7 +57,7 @@ export default function EditItemsForm() {
       setFormData({
         ...formData,
         [e.target.name]: e.target.checked,
-        shoppingStatus: e.target.checked ? "shopping" : "None", 
+        shoppingStatus: e.target.checked ? "shopping" : "None",
       });
     } else {
       setFormData({
@@ -67,13 +74,30 @@ export default function EditItemsForm() {
       return;
     }
 
+    const normalizedItemName = formData.name.toLowerCase().trim();
+    const normalizedCategory = formData.category.toLowerCase().trim();
+
+    const duplicateItem = existingItems.some(
+      (item) =>
+        item.name.toLowerCase().trim() === normalizedItemName &&
+        item.category.toLowerCase().trim() === normalizedCategory &&
+        item._id !== id // Make sure we don't check the current item being edited
+    );
+
+    if (duplicateItem) {
+      setIsDuplicate(true);
+      return; // Prevent form submission if a duplicate is found
+    } else {
+      setIsDuplicate(false);
+    }
+
     try {
       // Ensure reminderDate is a valid Date object
       const updatedItem = await updateItem(id, {
         ...formData,
         reminderDate: new Date(formData.reminderDate), // Make sure reminderDate is a Date object
       });
-      console.log("Updated Item:", updatedItem);
+      // console.log("Updated Item:", updatedItem);
       dispatch({ type: ACTIONS.EDIT_ITEM, payload: updatedItem });
 
       if (formData.addedToShoppingList) {
@@ -93,6 +117,11 @@ export default function EditItemsForm() {
   return (
     <div>
       <h2>Edit Item</h2>
+      {isDuplicate && (
+        <p style={{ color: "red" }}>
+          This item already exists in the selected category.
+        </p>
+      )}
       {formData ? (
         <form onSubmit={handleSubmit}>
           <label>
@@ -101,7 +130,7 @@ export default function EditItemsForm() {
               onChange={handleChange}
               type="text"
               name="name"
-              value={formData.name} 
+              value={formData.name}
             />
           </label>
           <br />
@@ -111,9 +140,9 @@ export default function EditItemsForm() {
             <select
               onChange={handleChange}
               name="category"
-              value={formData.category} 
+              value={formData.category}
             >
-              <option value="Uncategorized">Uncategorized</option>
+              <option value="uncategorized">Uncategorized</option>
               <option value="groceries">Groceries</option>
               <option value="household">Household</option>
               <option value="clothes">Clothes</option>
@@ -128,7 +157,8 @@ export default function EditItemsForm() {
               onChange={handleChange}
               type="number"
               name="quantity"
-              value={formData.quantity} 
+              value={formData.quantity}
+              min={1}
             />
           </label>
           <br />
@@ -139,7 +169,7 @@ export default function EditItemsForm() {
               onChange={handleChange}
               type="date"
               name="datePurchased"
-              value={formData.datePurchased} 
+              value={formData.datePurchased}
             />
           </label>
           <br />
@@ -150,7 +180,7 @@ export default function EditItemsForm() {
               onChange={handleChange}
               type="date"
               name="reminderDate"
-              value={formData.reminderDate} 
+              value={formData.reminderDate}
             />
           </label>
           <br />
@@ -161,7 +191,7 @@ export default function EditItemsForm() {
               onChange={handleChange}
               type="checkbox"
               name="addedToShoppingList"
-              checked={formData.addedToShoppingList} 
+              checked={formData.addedToShoppingList}
             />
           </label>
           <br />

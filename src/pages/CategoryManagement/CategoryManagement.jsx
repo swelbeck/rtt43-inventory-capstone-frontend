@@ -6,8 +6,8 @@ import {
   updateCategory,
 } from "../../utilities/api/categoryController.mjs";
 import { InventoryContext } from "../../contexts/InventoryContext";
-import CategoryForm from "../../components/Categories/CategoryForm";
-import CategoryList from "../../components/Categories/CategoryList";
+import CategoryForm from "../../components/Categories/CategoryForm/CategoryForm";
+import CategoryList from "../../components/Categories/CategoryList/CategoryList";
 import ACTIONS from "../../utilities/reducers/inventoryReducerActions.mjs";
 import "./CategoryManagement.css";
 
@@ -15,7 +15,7 @@ export default function CategoryManagement() {
   const [categories, setCategories] = useState([]);
   const [editingCategoryId, setEditingCategoryId] = useState(null);
 
-  const { dispatch } = useContext(InventoryContext); // Get dispatch from context
+  const { dispatch } = useContext(InventoryContext); 
 
   useEffect(() => {
     async function fetchCategories() {
@@ -29,7 +29,7 @@ export default function CategoryManagement() {
     try {
       const addedCategory = await createCategory({ name: categoryName });
       if (addedCategory && addedCategory.newCategory) {
-        setCategories((prev) => [...prev, addedCategory.newCategory]); // Add the new category
+        setCategories((prev) => [...prev, addedCategory.newCategory]);
       }
     } catch (error) {
       console.error("Error adding new category:", error);
@@ -44,7 +44,7 @@ export default function CategoryManagement() {
       type: ACTIONS.UPDATE_CATEGORY,
       payload: {
         _id: categoryId,
-        name: "Uncategorized",
+        name: "uncategorized",
       },
     });
 
@@ -78,6 +78,7 @@ export default function CategoryManagement() {
             ? categories.find((cat) => cat._id === editingCategoryId)
             : null
         }
+        existingCategories={categories}
       />
       <CategoryList
         categories={categories}

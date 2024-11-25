@@ -12,10 +12,6 @@ import "./ShoppingList.css";
 export default function ShoppingList() {
   const { inventory, dispatch } = useContext(InventoryContext);
 
-  // useEffect(() => {
-  //   console.log("Inventory updated:", inventory);
-  // }, [inventory]);
-
   // Filter items into Shopping List and Bought
   const shoppingList = inventory.filter(
     (item) => item.shoppingStatus === "shopping"
@@ -49,19 +45,6 @@ export default function ShoppingList() {
         payload: updatedItem,
       });
 
-      // // If the item is marked as "shopping", set addedToShoppingList to true
-      // if (updatedItem.shoppingStatus === "shopping") {
-      //   dispatch({
-      //     type: ACTIONS.ADD_ITEM_TO_SHOPPING_LIST,
-      //     payload: updatedItem,
-      //   });
-      // } else {
-      //   // If the item is marked as "bought", set addedToShoppingList to false
-      //   dispatch({
-      //     type: ACTIONS.DELETE_ITEM_FROM_SHOPPING_LIST,
-      //     payload: updatedItem._id,
-      //   });
-      // }
     } catch (error) {
       console.error("Error toggling shopping list status:", error);
     }
@@ -88,7 +71,6 @@ export default function ShoppingList() {
       dispatch({ type: ACTIONS.EDIT_ITEM, payload: updatedItem });
 
       if (editedItem.addedToShoppingList) {
-        // updatedItem.shoppingStatus = "shopping";
         dispatch({
           type: ACTIONS.ADD_ITEM_TO_SHOPPING_LIST,
           payload: updatedItem,
@@ -100,25 +82,6 @@ export default function ShoppingList() {
     }
   }
 
-  // async function handleDelete(item) {
-  //   console.log(item);
-  //   try {
-  //     // Update Shopping Status to "None" in backend
-  //     const updatedItem = await updateItem(item._id, {
-  //       shoppingStatus: "None",
-  //     });
-
-  //     dispatch({
-  //       type: ACTIONS.DELETE_ITEM_FROM_SHOPPING_LIST,
-  //       payload: item._id,
-  //     });
-
-  //     const updatedInventory = await getInventory();
-  //     dispatch({ type: ACTIONS.SET_INVENTORY, payload: updatedInventory });
-  //   } catch (error) {
-  //     console.error("Error deleting item from shopping list:", error);
-  //   }
-  // }
 
   return (
     <div className="shopping-list">

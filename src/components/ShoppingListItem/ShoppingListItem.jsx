@@ -16,8 +16,6 @@ export default function ShoppingListItem({
   const [isEditing, setIsEditing] = useState(false);
   const [editedItem, setEditedItem] = useState({ ...item });
 
-  // console.log("Item in ShoppingListItem:", item);
-
   // Setup drag hook
   const [{ isDragging }, drag] = useDrag({
     type: ITEM_TYPE,

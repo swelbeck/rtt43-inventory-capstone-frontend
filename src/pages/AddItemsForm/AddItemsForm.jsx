@@ -1,16 +1,18 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { InventoryContext } from "../../contexts/InventoryContext";
 import ACTIONS from "../../utilities/reducers/inventoryReducerActions.mjs";
-import { createItem } from "../../utilities/api/itemController.mjs";
+import {
+  createItem,
+  getInventory,
+} from "../../utilities/api/itemController.mjs";
 
 export default function AddItemsForm() {
   const nav = useNavigate();
   const { dispatch } = useContext(InventoryContext);
-
   const [formData, setFormData] = useState({
     name: "",
-    category: "Uncategorized",
+    category: "uncategorized",
     quantity: 1,
     datePurchased: new Date().toISOString().split("T")[0], // Format as yyyy-MM-dd
     reminderDate: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
@@ -19,6 +21,17 @@ export default function AddItemsForm() {
     addedToShoppingList: false,
     shoppingStatus: "None",
   });
+
+  const [existingItems, setExistingItems] = useState([]);
+  const [isDuplicate, setIsDuplicate] = useState(false);
+
+  useEffect(() => {
+    async function fetchItems() {
+      const allItems = await getInventory();
+      setExistingItems(allItems);
+    }
+    fetchItems();
+  }, []);
 
   function handleClick() {
     nav("/inventory");
@@ -42,23 +55,35 @@ export default function AddItemsForm() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (!formData.name) {
-      return;
+    // Check if the item already exists
+    const normalizedItemName = formData.name.toLowerCase().trim();
+    const normalizedCategory = formData.category.toLowerCase().trim();
+
+    // Check if the item already exists in the selected category
+    const duplicateItem = existingItems.find(
+      (item) =>
+        item.name.toLowerCase().trim() === normalizedItemName &&
+        item.category.toLowerCase().trim() === normalizedCategory
+    );
+
+    if (duplicateItem) {
+      setIsDuplicate(true);
+      return; // Prevent form submission
+    } else {
+      setIsDuplicate(false);
     }
 
     const formDataWithDates = {
       ...formData,
-      reminderDate: new Date(formData.reminderDate), 
+      reminderDate: new Date(formData.reminderDate),
     };
 
     try {
       const newItem = await createItem({
         ...formDataWithDates,
         shoppingStatus:
-          formDataWithDates.shoppingStatus === "shopping" ? "shopping" : "None", // Ensure shoppingStatus is "shopping" if checkbox is checked
+          formDataWithDates.shoppingStatus === "shopping" ? "shopping" : "None",
       });
-      
-      console.log("New Item Added:", newItem);
 
       dispatch({ type: ACTIONS.ADD_ITEM, payload: newItem.newItem });
 
@@ -78,6 +103,11 @@ export default function AddItemsForm() {
   return (
     <div>
       <h2>Add Item to Inventory</h2>
+      {isDuplicate && (
+        <p style={{ color: "red" }}>
+          This item already exists in the selected category.
+        </p>
+      )}
       <form onSubmit={handleSubmit}>
         <label>
           Name: <input onChange={handleChange} type="text" name="name" />
@@ -91,7 +121,7 @@ export default function AddItemsForm() {
             name="category"
             value={formData.category}
           >
-            <option value="Uncategorized">Uncategorized</option>
+            <option value="uncategorized">Uncategorized</option>
             <option value="groceries">Groceries</option>
             <option value="household">Household</option>
             <option value="clothes">Clothes</option>
@@ -107,6 +137,7 @@ export default function AddItemsForm() {
             type="number"
             name="quantity"
             value={formData.quantity}
+            min={1}
           />
         </label>
         <br />

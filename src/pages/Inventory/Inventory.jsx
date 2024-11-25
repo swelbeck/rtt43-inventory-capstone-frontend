@@ -16,7 +16,7 @@ export default function Inventory() {
   // Group items by category
   const categories = useMemo(() => {
     return inventory.reduce((acc, item) => {
-      const category = item.category?.trim() || "Uncategorized";
+      const category = item.category?.trim().toLowerCase() || "uncategorized";
       if (!acc[category]) acc[category] = [];
       acc[category].push(item);
       return acc;
@@ -30,7 +30,7 @@ export default function Inventory() {
     if (filteredCategory) {
       itemsToFilter = inventory.filter(
         (item) =>
-          (item.category?.trim() || "Uncategorized") === filteredCategory
+          (item.category?.trim() || "uncategorized") === filteredCategory
       );
     }
 
@@ -44,7 +44,7 @@ export default function Inventory() {
 
     // Group items by category
     const groupedItems = itemsToFilter.reduce((acc, item) => {
-      const category = item.category?.trim() || "Uncategorized";
+      const category = item.category?.trim().toLowerCase() || "uncategorized";
       if (!acc[category]) acc[category] = [];
       acc[category].push(item);
       return acc;
@@ -76,7 +76,7 @@ export default function Inventory() {
           >
             <option value="">All Categories</option>
             {Object.keys(categories).map((el) => (
-              <option key={el} value={el}>
+              <option key={el} value={el} className="category-headings">
                 {el}
               </option>
             ))}
