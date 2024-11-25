@@ -36,16 +36,19 @@ export default function ShoppingList() {
     dispatch({ type: ACTIONS.TOGGLE_SHOPPING_STATUS, payload: updatedItem });
   };
 
+  // Handle toggling shopping status
   async function handleToggle(item) {
     try {
-      const updatedItem = await toggleShoppingListStatus(item._id);
+      const updatedItem = await updateItem(item._id, {
+        shoppingStatus:
+          item.shoppingStatus === "shopping" ? "bought" : "shopping",
+      });
 
       // Dispatch the status change for updating `shoppingStatus`
       dispatch({
         type: ACTIONS.TOGGLE_SHOPPING_STATUS,
         payload: updatedItem,
       });
-
     } catch (error) {
       console.error("Error toggling shopping list status:", error);
     }
@@ -53,13 +56,10 @@ export default function ShoppingList() {
 
   async function handleRemoveFromShoppingList(item) {
     try {
-      const updatedItem = await toggleShoppingListStatus(item._id);
-
-      // Dispatch action to remove the item from the shopping list
-      dispatch({
-        type: ACTIONS.DELETE_ITEM_FROM_SHOPPING_LIST,
-        payload: updatedItem._id,
+      const updatedItem = await updateItem(item._id, {
+        shoppingStatus: "None",
       });
+      dispatch({ type: ACTIONS.TOGGLE_SHOPPING_STATUS, payload: updatedItem });
     } catch (error) {
       console.error("Error removing item from shopping list:", error);
     }
@@ -68,7 +68,7 @@ export default function ShoppingList() {
   async function handleSave(editedItem) {
     try {
       const updatedItem = await updateItem(editedItem._id, editedItem);
-      console.log("Updated Item:", updatedItem);
+      // console.log("Updated Item:", updatedItem);
       dispatch({ type: ACTIONS.EDIT_ITEM, payload: updatedItem });
 
       if (editedItem.addedToShoppingList) {
@@ -77,12 +77,10 @@ export default function ShoppingList() {
           payload: updatedItem,
         });
       }
-
     } catch (error) {
       console.error("Error saving item:", error);
     }
   }
-
 
   return (
     <div className="shopping-list">

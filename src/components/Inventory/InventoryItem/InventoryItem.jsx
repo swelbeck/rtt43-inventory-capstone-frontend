@@ -5,6 +5,7 @@ import ACTIONS from "../../../utilities/reducers/inventoryReducerActions.mjs";
 import {
   toggleShoppingListStatus,
   deleteItem,
+  updateItem
 } from "../../../utilities/api/itemController.mjs";
 import "./InventoryItem.css";
 import {
@@ -18,23 +19,26 @@ import {
 export default function InventoryItem({ item }) {
   const { dispatch } = useContext(InventoryContext);
 
+  // Add item to shopping list
   async function handleAddToShoppingList() {
     try {
-      const updatedItem = await toggleShoppingListStatus(item._id);
+      const updatedItem = await updateItem(item._id, {
+        shoppingStatus: "shopping",
+      });
       dispatch({ type: ACTIONS.TOGGLE_SHOPPING_STATUS, payload: updatedItem });
     } catch (error) {
       console.error("Error updating shopping list status:", error);
     }
   }
 
+  // Remove item from Shopping List
   async function handleRemoveFromShoppingList() {
     try {
-      const updatedItem = await toggleShoppingListStatus(item._id);
-
-      dispatch({
-        type: ACTIONS.DELETE_ITEM_FROM_SHOPPING_LIST,
-        payload: updatedItem._id,
+      const updatedItem = await updateItem(item._id, {
+        shoppingStatus: "None",
       });
+      dispatch({ type: ACTIONS.TOGGLE_SHOPPING_STATUS, payload: updatedItem });
+
     } catch (error) {
       console.error("Error updating shopping list status:", error);
     }
@@ -50,6 +54,7 @@ export default function InventoryItem({ item }) {
       console.error("Error deleting item:", error);
     }
   }
+
 
   return (
     <div className="item">
