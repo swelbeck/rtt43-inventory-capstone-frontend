@@ -1,0 +1,31 @@
+form {
+  background-color: #FAF3DD; /* Light cream background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+input[type="text"] {
+  background-color: #C8D5B9; /* Pale green */
+  border: 1px solid #8FC0A9; /* Muted teal */
+  padding: 12px;
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 5px;
+}
+
+button {
+  background-color: #8FC0A9; /* Muted teal */
+  padding: 12px;
+  border: none;
+  color: #FAF3DD;
+  font-size: 16px;
+  margin-top: 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #68B0AB; /* Darker teal on hover */
+}

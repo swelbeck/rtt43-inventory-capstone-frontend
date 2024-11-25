@@ -1,5 +1,6 @@
-function SearchBar({ searchFormData, setSearchFormData }) {
+import "./SearchBar.css";
 
+function SearchBar({ searchFormData, setSearchFormData }) {
   function handleChange(e) {
     setSearchFormData({
       ...searchFormData,
@@ -8,7 +9,7 @@ function SearchBar({ searchFormData, setSearchFormData }) {
   }
 
   return (
-    <form>
+    <form className="search-bar-form">
       <input
         id="text"
         onChange={handleChange}

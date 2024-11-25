@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { Link } from "react-router-dom";
 import { InventoryContext } from "../../../contexts/InventoryContext.jsx";
 import ACTIONS from "../../../utilities/reducers/inventoryReducerActions.mjs";
@@ -7,8 +7,13 @@ import {
   deleteItem,
 } from "../../../utilities/api/itemController.mjs";
 import "./InventoryItem.css";
-import { FaEdit, FaTrashAlt } from "react-icons/fa";
-
+import {
+  FaEdit,
+  FaTrashAlt,
+  FaInfoCircle,
+  FaPlusCircle,
+  FaMinusCircle,
+} from "react-icons/fa";
 
 export default function InventoryItem({ item }) {
   const { dispatch } = useContext(InventoryContext);
@@ -30,13 +35,6 @@ export default function InventoryItem({ item }) {
         type: ACTIONS.DELETE_ITEM_FROM_SHOPPING_LIST,
         payload: updatedItem._id,
       });
-
-      // // Optionally update inventory state if needed 
-      // dispatch({
-      //   type: ACTIONS.SET_INVENTORY,
-      //   payload: updatedInventory, // Only if you need to sync inventory with the backend.
-      // });
-
     } catch (error) {
       console.error("Error updating shopping list status:", error);
     }
@@ -59,25 +57,31 @@ export default function InventoryItem({ item }) {
         <strong>{item.name}</strong>
       </p>
       <Link to={`/item-details/${item._id}`}>
-        <button>Details</button>
+        <button title="View Details">
+          <FaInfoCircle />
+        </button>
       </Link>
       <p>Quantity: {item.quantity}</p>
       {item.shoppingStatus === "shopping" ? (
-        <button onClick={handleRemoveFromShoppingList}>
-          Remove from Shopping List
+        <button
+          onClick={handleRemoveFromShoppingList}
+          title="Remove from Shopping List"
+        >
+          <FaMinusCircle />
         </button>
       ) : (
-        <button onClick={handleAddToShoppingList}>Add to Shopping List</button>
+        <button onClick={handleAddToShoppingList} title="Add to Shopping List">
+          <FaPlusCircle />
+        </button>
       )}
 
       <Link to={`/edit-item/${item._id}`}>
-        <button>
-          <FaEdit /> Edit
+        <button title="Edit Item">
+          <FaEdit />
         </button>
       </Link>
-      <button onClick={handleDelete}>
+      <button onClick={handleDelete} title="Delete Item">
         <FaTrashAlt />
-        Delete
       </button>
     </div>
   );

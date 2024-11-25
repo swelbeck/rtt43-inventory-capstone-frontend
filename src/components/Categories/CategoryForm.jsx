@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import "./CategoryForm.css";
 
 export default function CategoryForm({ onSubmit, categoryToEdit }) {
   const [categoryName, setCategoryName] = useState("");

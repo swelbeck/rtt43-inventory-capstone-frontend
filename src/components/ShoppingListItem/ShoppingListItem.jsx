@@ -16,7 +16,7 @@ export default function ShoppingListItem({
   const [isEditing, setIsEditing] = useState(false);
   const [editedItem, setEditedItem] = useState({ ...item });
 
-  console.log("Item in ShoppingListItem:", item);
+  // console.log("Item in ShoppingListItem:", item);
 
   // Setup drag hook
   const [{ isDragging }, drag] = useDrag({
@@ -97,42 +97,5 @@ export default function ShoppingListItem({
         <FaEdit /> Toggle
       </button>
     </div>
-    // <div className="item">
-    //   {isEditing ? (
-    //     <>
-    //       <input
-    //         type="text"
-    //         name="name"
-    //         value={editedItem.name}
-    //         onChange={handleChange}
-    //       />
-    //       <input
-    //         type="number"
-    //         name="quantity"
-    //         value={editedItem.quantity}
-    //         onChange={handleChange}
-    //       />
-    //       <button onClick={handleSave}>Save</button>
-    //     </>
-    //   ) : (
-    //     <>
-    //       <p>
-    //         {item.name} - {item.quantity}
-    //       </p>
-    //       <button onClick={() => setIsEditing(true)}>Edit</button>
-    //     </>
-    //   )}
-    //   <input
-    //     type="checkbox"
-    //     checked={item.shoppingStatus === "bought"}
-    //     onChange={handleToggle}
-    //   />
-    //   <span>
-    //     {item.shoppingStatus === "bought"
-    //       ? "Move back to shopping"
-    //       : "Move to bought"}
-    //   </span>
-    //   <button onClick={handleRemove}>Delete</button>
-    // </div>
   );
 }

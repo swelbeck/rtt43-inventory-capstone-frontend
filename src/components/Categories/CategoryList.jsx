@@ -1,4 +1,5 @@
 import { useState } from "react";
+import "./CategoryList.css"
 
 export default function CategoryList({ categories, onDelete, onEdit }) {
   const [editingCategoryId, setEditingCategoryId] = useState(null);

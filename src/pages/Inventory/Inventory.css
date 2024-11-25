@@ -1,20 +1,32 @@
 .inventory-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  padding: 20px;
+  background-color: #FAF3DD;
 }
 
-.categories {
-  display: flex;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
+h2 {
+  color: #4A7C59; /* Dark green */
+}
+
+form {
   margin-top: 20px;
 }
 
-.category-container {
-  background-color: white;
-  padding: 15px;
-  width: 250px;
-  text-align: center;
+select,
+input[type="text"] {
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+  border: 1px solid #8FC0A9;
+}
+
+button {
+  background-color: #8FC0A9;
+  color: #FAF3DD;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #68B0AB;
 }

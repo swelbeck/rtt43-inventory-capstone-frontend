@@ -1,4 +1,5 @@
 import InventoryItem from "../InventoryItem/InventoryItem";
+import "./InventoryCategory.css";
 
 export default function InventoryCategory({ category, items }) {
   return (

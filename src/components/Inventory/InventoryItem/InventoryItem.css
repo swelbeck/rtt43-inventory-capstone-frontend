@@ -1,19 +1,33 @@
 .item {
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background-color: #C8D5B9;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.item h4 {
-  font-size: 1.2rem;
-  color: #333;
+.item p {
+  font-size: 16px;
+  margin-bottom: 10px;
 }
 
 .item button {
-  background-color: #4CAF50;
+  background-color: transparent; /* Make the button transparent */
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  font-size: 18px;
+  color: #4A7C59; /* Dark green for icon color */
+  margin-left: 10px;
 }
 
 .item button:hover {
-  background-color: #45a049;
+  color: #68B0AB; /* Change to teal on hover */
+}
+
+.item button:focus {
+  outline: none; /* Remove outline */
 }
