@@ -84,6 +84,7 @@ export default function Inventory() {
               value={filteredCategory}
             >
               <option value="">All Categories</option>
+              <option value="uncategorized">uncategorized</option>
               {categories && categories.length > 0 ? (
                 categories.map((category) => (
                   <option key={category._id} value={category.name}>
