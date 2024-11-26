@@ -98,6 +98,7 @@ export default function ShoppingListItem({
             name="quantity"
             value={editedItem.quantity}
             onChange={handleChange}
+            min={1}
           />
           <button onClick={handleSave}>Save</button>
         </>
