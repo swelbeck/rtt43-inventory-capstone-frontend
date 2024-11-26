@@ -47,6 +47,8 @@ async function updateItem(id, formData) {
   }
 }
 
+
+
 async function toggleShoppingListStatus(id) {
   try {
     let url = `http://localhost:3000/api/items/${id}/toggle-shopping`;

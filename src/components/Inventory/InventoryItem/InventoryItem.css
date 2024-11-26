@@ -9,13 +9,7 @@
   border-radius: 8px;
   background-color: #FFFFFF; /* White background */
   min-height: 150px;
-}
-
-.item-details {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  flex-grow: 1;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow */
 }
 
 .item-name {
@@ -46,5 +40,5 @@
 }
 
 .item-icons button:hover {
-  color: #EF8354; /* Warm orange */
+  color: #EF8354; /* Warm orange on hover */
 }

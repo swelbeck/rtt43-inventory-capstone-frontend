@@ -9,8 +9,8 @@ form {
 }
 
 input[type="text"] {
-  background-color: #BFC0C0; /* Light Gray */
-  border: 1px solid #4F5D75; /* Muted blue border */
+  background-color: #D0E1F9; /* Light blue */
+  border: 1px solid #1F3B6F; /* Darker blue for contrast */
   padding: 12px;
   width: 100%;
   margin-top: 10px;
@@ -18,7 +18,7 @@ input[type="text"] {
 }
 
 button {
-  background-color: #EF8354; /* Warm orange */
+  background-color: #B2C8DC; /* Soft, muted blue */
   color: #FFFFFF;
   padding: 12px;
   border: none;
@@ -29,5 +29,5 @@ button {
 }
 
 button:hover {
-  background-color: #D65B3E; /* Slightly darker orange */
+  background-color: #849BB0; /* Slightly darker shade on hover */
 }

@@ -9,11 +9,12 @@ import {
 } from "../../utilities/api/itemController.mjs";
 import { InventoryContext } from "../../contexts/InventoryContext";
 import ACTIONS from "../../utilities/reducers/inventoryReducerActions.mjs";
+import "./EditItemsForm.css";
 
 export default function EditItemsForm() {
   const nav = useNavigate();
   const { id } = useParams();
-  const { dispatch } = useContext(InventoryContext);
+  const { dispatchInventory, categories } = useContext(InventoryContext);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -76,7 +77,8 @@ export default function EditItemsForm() {
   async function handleSubmit(e) {
     e.preventDefault();
 
-    if (!formData.name) {
+    if (!formData.name.trim()) {
+      alert("Please enter a name for the item.");
       return;
     }
 
@@ -104,11 +106,11 @@ export default function EditItemsForm() {
         reminderDate: new Date(formData.reminderDate), // Make sure reminderDate is a Date object
       });
       // console.log("Updated Item:", updatedItem);
-      dispatch({ type: ACTIONS.EDIT_ITEM, payload: updatedItem });
+      dispatchInventory({ type: ACTIONS.EDIT_ITEM, payload: updatedItem });
 
       if (formData.addedToShoppingList) {
         updatedItem.shoppingStatus = "shopping";
-        dispatch({
+        dispatchInventory({
           type: ACTIONS.ADD_ITEM_TO_SHOPPING_LIST,
           payload: updatedItem,
         });
@@ -149,10 +151,13 @@ export default function EditItemsForm() {
               value={formData.category}
             >
               <option value="uncategorized">Uncategorized</option>
-              <option value="groceries">Groceries</option>
-              <option value="household">Household</option>
-              <option value="clothes">Clothes</option>
-              <option value="other">Other</option>
+              {/* Map through the categories and display them */}
+              {categories &&
+                categories.map((category) => (
+                  <option key={category._id} value={category.name}>
+                    {category.name}
+                  </option>
+                ))}
             </select>
           </label>
           <br />

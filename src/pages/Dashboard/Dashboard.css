@@ -4,23 +4,29 @@
   display: flex;
   justify-content: space-around;
   padding: 20px;
-  background-color: #FFFFFF; /* White background for the container */
+  background-color: #ffffff; /* White background for the container */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
 .metric {
-  background-color: #BFC0C0; 
-  color: #2D3142; 
+  background-color: #b2c8dc; /* Light Gray */
+  color: #2d3142; /* Dark Slate Blue */
   padding: 20px;
-  border-radius: 5px;
+  margin: 10px;
+  border-radius: 8px;
   text-align: center;
   flex: 1;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
 
 h3 {
-  color: #2D3142; 
-  font-size: 1.5em; 
+  color: #2d3142; /* Dark Slate Blue */
+  font-size: 1.5em;
+  font-weight: 600; /* Slightly bold for headings */
 }
 
 p {
   font-size: 1.5em;
+  font-weight: bold; /* Make numbers stand out */
 }

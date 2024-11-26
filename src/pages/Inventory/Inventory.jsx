@@ -8,22 +8,29 @@ import SearchBar from "../../components/SearchBar/SearchBar";
 import "./Inventory.css";
 
 export default function Inventory() {
-  const { inventory } = useContext(InventoryContext);
+  const { inventory, categories } = useContext(InventoryContext);
   const [filteredItems, setFilteredItems] = useState({});
   const [filteredCategory, setFilteredCategory] = useState("");
-  const [searchFormData, setSearchFormData] = useState({
-    searchParams: "",
-  });
+  const [searchFormData, setSearchFormData] = useState({ searchParams: "" });
+
+  useEffect(() => {
+    // console.log("Categories: ", categories);
+    // console.log("Inventory: ", inventory);
+  }, [categories, inventory]);
 
   // Group items by category
-  const categories = useMemo(() => {
-    return inventory.reduce((acc, item) => {
-      const category = item.category?.trim().toLowerCase() || "uncategorized";
-      if (!acc[category]) acc[category] = [];
-      acc[category].push(item);
-      return acc;
-    }, {});
-  }, [inventory]);
+  // const categorizedItems = useMemo(() => {
+  //   if (!Array.isArray(inventory)) {
+  //     return {}; // If inventory is not an array, return empty object
+  //   }
+
+  //   return inventory.reduce((acc, item) => {
+  //     const category = item.category?.trim().toLowerCase() || "uncategorized";
+  //     if (!acc[category]) acc[category] = [];
+  //     acc[category].push(item);
+  //     return acc;
+  //   }, {});
+  // }, [inventory]);
 
   useEffect(() => {
     let itemsToFilter = inventory;
@@ -77,11 +84,15 @@ export default function Inventory() {
               value={filteredCategory}
             >
               <option value="">All Categories</option>
-              {Object.keys(categories).map((el) => (
-                <option key={el} value={el} className="category-headings">
-                  {el}
-                </option>
-              ))}
+              {categories && categories.length > 0 ? (
+                categories.map((category) => (
+                  <option key={category._id} value={category.name}>
+                    {category.name}
+                  </option>
+                ))
+              ) : (
+                <option value="">No categories available</option>
+              )}
             </select>
           </label>
         </form>

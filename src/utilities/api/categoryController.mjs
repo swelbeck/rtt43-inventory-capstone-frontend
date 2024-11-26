@@ -48,6 +48,18 @@ async function deleteCategory(id) {
   }
 }
 
+async function deleteCategoryAndUpdate(categoryId) {
+  try {
+    let url = `http://localhost:3000/api/categories/category/${categoryId}/`;
+
+    let res = await axios.delete(url);
+
+    return true;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 async function updateCategory(id, formData) {
   try {
     let url = `http://localhost:3000/api/categories/${id}`;
@@ -59,6 +71,18 @@ async function updateCategory(id, formData) {
     console.error(error);
   }
 }
+
+// async function updateItemCategories(categoryName) {
+//   try {
+//     let url = `http://localhost:3000/api/categories/category/${categoryName}`;
+
+//     let res = await axios.put(url, formData);
+
+//     return res.data;
+//   } catch (error) {
+//     console.error(error);
+//   }
+// }
 
 async function getOneCategory(id) {
   try {
@@ -78,5 +102,7 @@ export {
   checkCategoryExists,
   getOneCategory,
   deleteCategory,
+  deleteCategoryAndUpdate,
   updateCategory,
+  // updateItemCategories,
 };

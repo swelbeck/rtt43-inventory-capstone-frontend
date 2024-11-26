@@ -4,13 +4,13 @@
   background-color: #FFFFFF; /* White background */
   padding: 20px;
   border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
   margin-bottom: 20px;
   text-transform: capitalize;
 }
 
 h3 {
-  color: #4F5D75; /* Muted blue */
+  color: #1F3B6F; /* Muted blue */
   font-size: 1.4em;
 }
 
@@ -19,3 +19,4 @@ h3 {
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
 }
+

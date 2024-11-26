@@ -5,6 +5,7 @@ import {
   getAllCategories,
   createCategory,
   deleteCategory,
+  deleteCategoryAndUpdate,
   updateCategory,
 } from "../../utilities/api/categoryController.mjs";
 import { InventoryContext } from "../../contexts/InventoryContext";
@@ -14,24 +15,31 @@ import ACTIONS from "../../utilities/reducers/inventoryReducerActions.mjs";
 import "./CategoryManagement.css";
 
 export default function CategoryManagement() {
-  const [categories, setCategories] = useState([]);
+  const { categories, dispatchCategories } = useContext(InventoryContext);
   const [editingCategoryId, setEditingCategoryId] = useState(null);
 
-  const { dispatch } = useContext(InventoryContext); 
+  const { dispatchInventory } = useContext(InventoryContext);
 
   useEffect(() => {
     async function fetchCategories() {
       const allCategories = await getAllCategories();
-      setCategories(allCategories);
+      dispatchCategories({
+        type: ACTIONS.SET_CATEGORIES,
+        payload: allCategories,
+      });
     }
     fetchCategories();
-  }, []);
+  }, [dispatchCategories]);
 
   async function handleAddCategory(categoryName) {
+    console.log("Adding category:", categoryName); 
     try {
       const addedCategory = await createCategory({ name: categoryName });
       if (addedCategory && addedCategory.newCategory) {
-        setCategories((prev) => [...prev, addedCategory.newCategory]);
+        dispatchCategories({
+          type: ACTIONS.ADD_CATEGORY,
+          payload: addedCategory.newCategory,
+        });
       }
     } catch (error) {
       console.error("Error adding new category:", error);
@@ -39,34 +47,39 @@ export default function CategoryManagement() {
   }
 
   async function handleDeleteCategory(categoryId) {
-    await deleteCategory(categoryId);
+    try {
+      // Call backend to delete category and update items
+      await deleteCategoryAndUpdate(categoryId);
 
-    // Dispatch action to update inventory items that were using this category
-    dispatch({
-      type: ACTIONS.UPDATE_CATEGORY,
-      payload: {
-        _id: categoryId,
-        name: "uncategorized",
-      },
-    });
+      // Dispatch action to remove the category from the frontend
+      dispatchCategories({
+        type: ACTIONS.DELETE_CATEGORY,
+        payload: categoryId,
+      });
 
-    setCategories((prev) => prev.filter((cat) => cat._id !== categoryId));
+      // Dispatch action to update all items using this category to "uncategorized"
+      dispatchInventory({
+        type: ACTIONS.UPDATE_CATEGORY,
+        payload: {
+          _id: categoryId,
+          name: "uncategorized", // Set items' category to "uncategorized"
+        },
+      });
+
+      // getAllCategories(); // to ensure UI stays in sync
+    } catch (error) {
+      console.error("Error deleting category:", error);
+    }
   }
 
   async function handleEditCategory(categoryId, categoryName) {
     const updatedCategory = await updateCategory(categoryId, {
       name: categoryName,
     });
-
-    // Dispatch action to update category name in inventory
-    dispatch({
+    dispatchCategories({
       type: ACTIONS.UPDATE_CATEGORY,
       payload: updatedCategory,
     });
-
-    setCategories((prev) =>
-      prev.map((cat) => (cat._id === categoryId ? updatedCategory : cat))
-    );
     setEditingCategoryId(null);
   }
 

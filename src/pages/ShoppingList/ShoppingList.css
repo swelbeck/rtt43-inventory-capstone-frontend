@@ -28,8 +28,7 @@
   padding: 10px;
   border-radius: 8px;
   background-color: #FFFFFF; /* White background */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  border: 1px solid #BFC0C0; /* Light gray border */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow */
 }
 
 .category h3 {

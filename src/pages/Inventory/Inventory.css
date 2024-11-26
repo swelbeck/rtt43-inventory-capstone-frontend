@@ -3,49 +3,62 @@
 .inventory-container {
   padding: 20px;
   background-color: #FFFFFF; /* White background */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
 
-/* Container for the search bar and category dropdown */
 .search-category-container {
   display: flex;
   justify-content: space-between;
-  gap: 20px; /* Space between search bar and dropdown */
-  margin-bottom: 10px;
+  gap: 20px;
+  margin-bottom: 20px; /* More space between search and dropdown */
 }
 
-.category-dropdown{
+.category-dropdown {
   width: 50%;
   margin-bottom: 0;
   padding: 10px;
 }
 
-/* Ensure the search bar and dropdown each take up 50% of the width, same height */
+/* Style for the search bar and dropdown */
 .search-category-container input,
 .search-category-container select {
   width: 48%; 
-  padding: 10px;
+  padding: 12px;
   height: 50px; 
   border-radius: 5px;
-  border: 1px solid #BFC0C0; 
+  border: 1px solid #BFC0C0; /* Light gray border */
   font-size: 16px;
   box-sizing: border-box; 
 }
 
-/* Button styling for the 'Add Item to Inventory' button */
+/* Button styling for 'Add Item to Inventory' */
 .add-item-button {
-  background-color: #EF8354; 
+  background-color: #B2C8DC; 
   color: #FFFFFF;
   padding: 12px;
   border: none;
   font-size: 16px;
   border-radius: 5px;
   cursor: pointer;
-  display: inline-block; 
+  display: inline-block;
   margin-top: 20px;
-  width: auto; 
   text-decoration: none; 
 }
 
 .add-item-button:hover {
-  background-color: #D65B3E; 
+  background-color: #D65B3E; /* Slightly darker orange on hover */
+}
+
+/* Inventory Item Categories Styling */
+.categories {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Grid layout for items */
+  gap: 20px;
+}
+
+.category-headings {
+  color: #2D3142; /* Dark Slate Blue */
+  font-weight: bold;
+  text-transform: capitalize;
 }

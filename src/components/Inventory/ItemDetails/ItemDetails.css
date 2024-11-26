@@ -1,1 +1,14 @@
 /* ItemDetails.css */
+
+h2, h3 {
+  color: #2D3142; /* Dark Slate Blue */
+}
+
+p {
+  font-size: 1.2em;
+  color: #1F3B6F; /* Muted blue */
+}
+
+.item-details {
+  margin-top: 20px;
+}

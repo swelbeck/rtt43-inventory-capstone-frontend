@@ -21,6 +21,11 @@ export default function CategoryForm({
   function handleSubmit(e) {
     e.preventDefault();
 
+    if (!categoryName.trim()) {
+      alert("Please enter a category.");
+      return;
+    }
+
     // Normalize the category name for case-insensitive comparison
     const normalizedCategoryName = categoryName.toLowerCase().trim();
 

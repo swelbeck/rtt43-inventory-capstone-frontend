@@ -11,13 +11,13 @@ import ShoppingListItem from "../../components/ShoppingListItem/ShoppingListItem
 import "./ShoppingList.css";
 
 export default function ShoppingList() {
-  const { inventory, dispatch } = useContext(InventoryContext);
+  const { inventory, dispatchInventory } = useContext(InventoryContext);
 
   // Filter items into Shopping List and Bought
   const shoppingList = inventory.filter(
     (item) => item.shoppingStatus === "shopping"
   );
-  console.log("Filtered shopping list:", shoppingList);
+  // console.log("Filtered shopping list:", shoppingList);
   const boughtItems = inventory.filter(
     (item) => item.shoppingStatus === "bought"
   );
@@ -35,7 +35,10 @@ export default function ShoppingList() {
       purchaseDate: draggedItem.purchaseDate,
     });
 
-    dispatch({ type: ACTIONS.TOGGLE_SHOPPING_STATUS, payload: updatedItem });
+    dispatchInventory({
+      type: ACTIONS.TOGGLE_SHOPPING_STATUS,
+      payload: updatedItem,
+    });
   };
 
   // Handle toggling shopping status
@@ -47,7 +50,7 @@ export default function ShoppingList() {
       });
 
       // Dispatch the status change for updating `shoppingStatus`
-      dispatch({
+      dispatchInventory({
         type: ACTIONS.TOGGLE_SHOPPING_STATUS,
         payload: updatedItem,
       });
@@ -61,7 +64,10 @@ export default function ShoppingList() {
       const updatedItem = await updateItem(item._id, {
         shoppingStatus: "None",
       });
-      dispatch({ type: ACTIONS.TOGGLE_SHOPPING_STATUS, payload: updatedItem });
+      dispatchInventory({
+        type: ACTIONS.TOGGLE_SHOPPING_STATUS,
+        payload: updatedItem,
+      });
     } catch (error) {
       console.error("Error removing item from shopping list:", error);
     }
@@ -72,14 +78,14 @@ export default function ShoppingList() {
       // Only update the backend for "bought" items
       if (editedItem.shoppingStatus === "bought") {
         const updatedItem = await updateItem(editedItem._id, editedItem);
-        dispatch({ type: ACTIONS.EDIT_ITEM, payload: updatedItem });
+        dispatchInventory({ type: ACTIONS.EDIT_ITEM, payload: updatedItem });
       } else {
         // For "shopping" items, just update the local state
-        dispatch({ type: ACTIONS.EDIT_ITEM, payload: editedItem });
+        dispatchInventory({ type: ACTIONS.EDIT_ITEM, payload: editedItem });
       }
 
       if (editedItem.addedToShoppingList) {
-        dispatch({
+        dispatchInventory({
           type: ACTIONS.ADD_ITEM_TO_SHOPPING_LIST,
           payload: editedItem,
         });

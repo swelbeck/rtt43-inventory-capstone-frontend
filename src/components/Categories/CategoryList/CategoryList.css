@@ -13,10 +13,11 @@ li {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Light shadow for depth */
 }
 
 button {
-  background-color: #EF8354; /* Warm orange */
+  background-color: #B2C8DC; /* Soft, muted blue */
   border: none;
   padding: 8px 12px;
   font-size: 14px;
@@ -25,9 +26,10 @@ button {
 }
 
 button:hover {
-  background-color: #D65B3E; /* Darker orange on hover */
+  background-color: #849BB0; /* Slightly darker shade on hover */
 }
 
 span {
-  color: #4F5D75; /* Muted blue for default categories */
+  color: #1F3B6F; /* Darker blue for default categories */
+  font-style: italic;
 }

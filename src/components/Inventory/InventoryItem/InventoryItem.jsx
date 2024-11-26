@@ -19,7 +19,7 @@ import {
 } from "react-icons/fa";
 
 export default function InventoryItem({ item }) {
-  const { dispatch } = useContext(InventoryContext);
+  const { dispatchInventory } = useContext(InventoryContext);
 
   // Add item to shopping list
   async function handleAddToShoppingList() {
@@ -27,7 +27,10 @@ export default function InventoryItem({ item }) {
       const updatedItem = await updateItem(item._id, {
         shoppingStatus: "shopping",
       });
-      dispatch({ type: ACTIONS.TOGGLE_SHOPPING_STATUS, payload: updatedItem });
+      dispatchInventory({
+        type: ACTIONS.TOGGLE_SHOPPING_STATUS,
+        payload: updatedItem,
+      });
     } catch (error) {
       console.error("Error updating shopping list status:", error);
     }
@@ -39,7 +42,10 @@ export default function InventoryItem({ item }) {
       const updatedItem = await updateItem(item._id, {
         shoppingStatus: "None",
       });
-      dispatch({ type: ACTIONS.TOGGLE_SHOPPING_STATUS, payload: updatedItem });
+      dispatchInventory({
+        type: ACTIONS.TOGGLE_SHOPPING_STATUS,
+        payload: updatedItem,
+      });
     } catch (error) {
       console.error("Error updating shopping list status:", error);
     }
@@ -49,7 +55,7 @@ export default function InventoryItem({ item }) {
     try {
       const success = await deleteItem(item._id);
       if (success) {
-        dispatch({ type: ACTIONS.DELETE_ITEM, payload: item._id });
+        dispatchInventory({ type: ACTIONS.DELETE_ITEM, payload: item._id });
       }
     } catch (error) {
       console.error("Error deleting item:", error);

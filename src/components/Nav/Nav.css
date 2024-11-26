@@ -1,7 +1,7 @@
 /* Nav.css */
 
 nav {
-  background-color: #EF8354; /* Warm orange */
+  background-color: #B2C8DC; /* Soft, muted blue */
   padding: 15px;
   text-align: center;
 }
@@ -14,5 +14,5 @@ nav a {
 }
 
 nav a:hover {
-  color: #BFC0C0; /* Light gray on hover */
+  color: #4F5D75; /* Muted grey-blue on hover */
 }

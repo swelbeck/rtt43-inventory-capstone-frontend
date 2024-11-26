@@ -7,10 +7,11 @@ import {
   createItem,
   getInventory,
 } from "../../utilities/api/itemController.mjs";
+import "./AddItemsForm.css";
 
 export default function AddItemsForm() {
   const nav = useNavigate();
-  const { dispatch } = useContext(InventoryContext);
+  const { dispatchInventory, categories } = useContext(InventoryContext);
   const [formData, setFormData] = useState({
     name: "",
     category: "uncategorized",
@@ -56,6 +57,10 @@ export default function AddItemsForm() {
   async function handleSubmit(e) {
     e.preventDefault();
 
+    if (!formData.name.trim()) {
+      alert("Please enter a name for the item.");
+      return;
+    }
     // Check if the item already exists
     const normalizedItemName = formData.name.toLowerCase().trim();
     const normalizedCategory = formData.category.toLowerCase().trim();
@@ -86,10 +91,10 @@ export default function AddItemsForm() {
           formDataWithDates.shoppingStatus === "shopping" ? "shopping" : "None",
       });
 
-      dispatch({ type: ACTIONS.ADD_ITEM, payload: newItem.newItem });
+      dispatchInventory({ type: ACTIONS.ADD_ITEM, payload: newItem.newItem });
 
       if (newItem.shoppingStatus === "shopping") {
-        dispatch({
+        dispatchInventory({
           type: ACTIONS.ADD_ITEM_TO_SHOPPING_LIST,
           payload: newItem.newItem,
         });
@@ -123,10 +128,13 @@ export default function AddItemsForm() {
             value={formData.category}
           >
             <option value="uncategorized">Uncategorized</option>
-            <option value="groceries">Groceries</option>
-            <option value="household">Household</option>
-            <option value="clothes">Clothes</option>
-            <option value="other">Other</option>
+            {/* Map through the categories and display them */}
+            {categories &&
+              categories.map((category) => (
+                <option key={category._id} value={category.name}>
+                  {category.name}
+                </option>
+              ))}
           </select>
         </label>
         <br />
