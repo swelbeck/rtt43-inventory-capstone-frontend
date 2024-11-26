@@ -60,29 +60,35 @@ export default function Inventory() {
   return (
     <div className="inventory-container">
       <h2>Your Inventory</h2>
-      <SearchBar
-        searchFormData={searchFormData}
-        setSearchFormData={setSearchFormData}
-      />
-      <Link to={"/add-items"}>Add Item to Inventory</Link>
-      <form>
-        <label htmlFor="catFilter">
-          Filter by Category:{" "}
-          <select
-            id="catFilter"
-            name="catFilter"
-            onChange={handleFilterChange}
-            value={filteredCategory}
-          >
-            <option value="">All Categories</option>
-            {Object.keys(categories).map((el) => (
-              <option key={el} value={el} className="category-headings">
-                {el}
-              </option>
-            ))}
-          </select>
-        </label>
-      </form>
+      <div className="search-category-container">
+        <SearchBar
+          searchFormData={searchFormData}
+          setSearchFormData={setSearchFormData}
+        />
+        <form className="category-dropdown">
+          <label htmlFor="catFilter">
+            Filter by Category:{" "}
+            <select
+              id="catFilter"
+              name="catFilter"
+              onChange={handleFilterChange}
+              value={filteredCategory}
+            >
+              <option value="">All Categories</option>
+              {Object.keys(categories).map((el) => (
+                <option key={el} value={el} className="category-headings">
+                  {el}
+                </option>
+              ))}
+            </select>
+          </label>
+        </form>
+      </div>
+
+      <Link to={"/add-items"}>
+        <button className="add-item-button">Add Item to Inventory</button>
+      </Link>
+
       {Object.keys(filteredItems).length > 0 ? (
         <div className="categories">
           {Object.entries(filteredItems).map(([category, items]) => (

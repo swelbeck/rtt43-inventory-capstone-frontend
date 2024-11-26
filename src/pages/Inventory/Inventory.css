@@ -3,45 +3,47 @@
   background-color: #FFFFFF; /* White background */
 }
 
-h2 {
-  color: #2D3142; /* Dark Slate Blue */
-  font-size: 2em;
+/* Container for the search bar and category dropdown */
+.search-category-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px; /* Space between search bar and dropdown */
+  margin-bottom: 10px;
 }
 
-/* Make sure the form container is also constrained */
-form {
-  width: 100%;
-  max-width: 600px; /* Optional: limit to a maximum width */
-  margin: 0 auto;
-  padding: 20px;
-  background-color: #FFFFFF; /* White background */
-}
-
-/* Ensure inputs take up 100% width and fit within the form */
-input[type="text"],
-input[type="number"],
-input[type="date"],
-select {
-  width: 100%;
+.category-dropdown{
+  width: 50%;
+  margin-bottom: 0;
   padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #BFC0C0; /* Light gray border */
-  font-size: 16px;
-  box-sizing: border-box;
 }
 
-/* Button styling */
-button {
-  background-color: #EF8354; /* Warm orange */
+/* Ensure the search bar and dropdown each take up 50% of the width, same height */
+.search-category-container input,
+.search-category-container select {
+  width: 48%; 
+  padding: 10px;
+  height: 50px; 
+  border-radius: 5px;
+  border: 1px solid #BFC0C0; 
+  font-size: 16px;
+  box-sizing: border-box; 
+}
+
+/* Button styling for the 'Add Item to Inventory' button */
+.add-item-button {
+  background-color: #EF8354; 
   color: #FFFFFF;
   padding: 12px;
   border: none;
-  cursor: pointer;
   font-size: 16px;
   border-radius: 5px;
-  margin-top: 10px;
+  cursor: pointer;
+  display: inline-block; 
+  margin-top: 20px;
+  width: auto; 
+  text-decoration: none; 
 }
 
-button:hover {
-  background-color: #D65B3E; /* Darker orange on hover */
+.add-item-button:hover {
+  background-color: #D65B3E; 
 }

@@ -2,6 +2,7 @@ import { useContext, useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   findOneItem,
+  getInventory,
   updateItem,
 } from "../../utilities/api/itemController.mjs";
 import { InventoryContext } from "../../contexts/InventoryContext";
@@ -21,6 +22,9 @@ export default function EditItemsForm() {
     addedToShoppingList: false,
     shoppingStatus: "None",
   });
+
+  const [existingItems, setExistingItems] = useState([]);
+  const [isDuplicate, setIsDuplicate] = useState(false);
 
   useEffect(() => {
     async function getData() {
