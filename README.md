@@ -21,7 +21,19 @@ The front-end interacts with the back-end via RESTful API calls to perform CRUD 
 - **Axios**: For making HTTP requests to the back-end API.
 - **CSS**: For styling the application.
 
-## Installation
+## Routes
+| **Route**                         | **Component**        | **Description**                                                                                             |
+|-----------------------------------|----------------------|-------------------------------------------------------------------------------------------------------------|
+| `/`                               | `Dashboard`          | Displays key inventory metrics (e.g., total items, shopping list, bought items).                            |
+| `/inventory`                      | `Inventory`          | Displays the list of inventory items with search and filter options.                                         |
+| `/add-items`                      | `AddItemsForm`       | A form to add new items to the inventory.                                                                    |
+| `/edit-item/:id`                  | `EditItemsForm`      | A form to edit an existing item in the inventory.                                                             |
+| `/item-details/:id`               | `ItemDetails`        | Displays detailed information about a specific inventory item.                                               |
+| `/categories`                     | `CategoryManagement` | Allows managing (adding, editing, deleting) inventory categories.                                            |
+| `/shopping-list`                  | `ShoppingList`       | Displays the shopping list with the ability to move items between "shopping" and "bought".                   |
+| `*`                               | `NotFound`           | A 404 page displayed when no matching route is found.                                                         |
+
+
 
 ### Front-End Setup
 
