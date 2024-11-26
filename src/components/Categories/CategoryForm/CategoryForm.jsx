@@ -10,7 +10,7 @@ export default function CategoryForm({
   const [isDuplicate, setIsDuplicate] = useState(false);
 
   useEffect(() => {
-    console.log(categoryToEdit);
+    // console.log(categoryToEdit);
     if (categoryToEdit) {
       setCategoryName(categoryToEdit.name);
     }
