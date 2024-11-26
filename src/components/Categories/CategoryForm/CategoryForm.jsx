@@ -1,3 +1,5 @@
+// CategoryForm.jsx
+
 import { useState, useEffect } from "react";
 import "./CategoryForm.css";
 

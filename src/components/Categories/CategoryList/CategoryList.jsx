@@ -1,3 +1,5 @@
+// CategoryList.jsx
+
 import { useState } from "react";
 import "./CategoryList.css"
 

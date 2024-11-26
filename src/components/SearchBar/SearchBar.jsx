@@ -1,3 +1,5 @@
+// SearchBar.jsx
+
 import "./SearchBar.css";
 
 function SearchBar({ searchFormData, setSearchFormData }) {

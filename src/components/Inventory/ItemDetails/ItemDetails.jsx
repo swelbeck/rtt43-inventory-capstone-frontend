@@ -1,3 +1,5 @@
+// ItemDetails.jsx
+
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { findOneItem } from "../../../utilities/api/itemController.mjs";

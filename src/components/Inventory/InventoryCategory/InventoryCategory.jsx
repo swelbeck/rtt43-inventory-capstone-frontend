@@ -1,3 +1,5 @@
+// InventoryCategory.jsx
+
 import InventoryItem from "../InventoryItem/InventoryItem";
 import "./InventoryCategory.css";
 

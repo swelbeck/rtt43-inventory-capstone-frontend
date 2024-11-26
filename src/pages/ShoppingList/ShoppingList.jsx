@@ -1,3 +1,5 @@
+// ShoppingList.jsx
+
 import { useContext, useEffect } from "react";
 import { InventoryContext } from "../../contexts/InventoryContext";
 import {

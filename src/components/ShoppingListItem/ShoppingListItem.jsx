@@ -1,3 +1,5 @@
+// ShoppingListItem.jsx
+
 import { useState } from "react";
 import { useDrag, useDrop } from "react-dnd";
 import { FaTrashAlt, FaEdit, FaExchangeAlt } from "react-icons/fa";

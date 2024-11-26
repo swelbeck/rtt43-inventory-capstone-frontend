@@ -1,3 +1,5 @@
+// Inventory.jsx
+
 import { useState, useEffect, useContext, useMemo } from "react";
 import { Link } from "react-router-dom";
 import { InventoryContext } from "../../contexts/InventoryContext";

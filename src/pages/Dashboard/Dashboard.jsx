@@ -1,3 +1,4 @@
+// Dashboard.jsx
 import "./Dashboard.css";
 
 export default function Dashboard() {
