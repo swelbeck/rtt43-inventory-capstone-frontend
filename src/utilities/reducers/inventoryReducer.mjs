@@ -35,19 +35,16 @@ export default function inventoryReducer(state, action) {
 
     case ACTIONS.UPDATE_CATEGORY:
       return state.map((item) =>
-        item.category._id === action.payload._id
-          ? {
-              ...item,
-              category: { ...item.category, name: action.payload.name },
-            }
+        item.category === action.payload._id
+          ? { ...item, category: "uncategorized" }
           : item
       );
 
-    case ACTIONS.SET_CATEGORIES:
-      return {
-        ...state,
-        categories: action.payload, // Update categories in the global state
-      };
+    // case ACTIONS.SET_CATEGORIES:
+    //   return {
+    //     ...state,
+    //     categories: action.payload, // Update categories in the global state
+    //   };
 
     default:
       return state;

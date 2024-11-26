@@ -8,6 +8,7 @@ import {
   deleteCategoryAndUpdate,
   updateCategory,
 } from "../../utilities/api/categoryController.mjs";
+import { getInventory } from "../../utilities/api/itemController.mjs";
 import { InventoryContext } from "../../contexts/InventoryContext";
 import CategoryForm from "../../components/Categories/CategoryForm/CategoryForm";
 import CategoryList from "../../components/Categories/CategoryList/CategoryList";
@@ -18,7 +19,7 @@ export default function CategoryManagement() {
   const { categories, dispatchCategories } = useContext(InventoryContext);
   const [editingCategoryId, setEditingCategoryId] = useState(null);
 
-  const { dispatchInventory } = useContext(InventoryContext);
+  const { inventory, dispatchInventory } = useContext(InventoryContext);
 
   useEffect(() => {
     async function fetchCategories() {
@@ -32,7 +33,7 @@ export default function CategoryManagement() {
   }, [dispatchCategories]);
 
   async function handleAddCategory(categoryName) {
-    console.log("Adding category:", categoryName); 
+    console.log("Adding category:", categoryName);
     try {
       const addedCategory = await createCategory({ name: categoryName });
       if (addedCategory && addedCategory.newCategory) {
@@ -59,14 +60,28 @@ export default function CategoryManagement() {
 
       // Dispatch action to update all items using this category to "uncategorized"
       dispatchInventory({
-        type: ACTIONS.UPDATE_CATEGORY,
-        payload: {
-          _id: categoryId,
-          name: "uncategorized", // Set items' category to "uncategorized"
-        },
+        type: ACTIONS.SET_INVENTORY,
+        payload: inventory.map((item) =>
+          item.category === categoryId
+            ? { ...item, category: "uncategorized" }
+            : item
+        ),
       });
 
-      // getAllCategories(); // to ensure UI stays in sync
+      // Re-fetch categories and inventory to reflect changes
+      const updatedCategories = await getAllCategories();
+      dispatchCategories({
+        type: ACTIONS.SET_CATEGORIES,
+        payload: updatedCategories,
+      });
+      
+      const updatedInventory = await getInventory();
+      dispatchInventory({
+        type: ACTIONS.SET_INVENTORY,
+        payload: updatedInventory,
+      });
+
+      // getAllCategories(); 
     } catch (error) {
       console.error("Error deleting category:", error);
     }
