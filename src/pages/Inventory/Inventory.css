@@ -1,10 +1,11 @@
 .inventory-container {
   padding: 20px;
-  background-color: #FAF3DD;
+  background-color: #FFFFFF; /* White background */
 }
 
 h2 {
-  color: #4A7C59; /* Dark green */
+  color: #2D3142; /* Dark Slate Blue */
+  font-size: 2em;
 }
 
 /* Make sure the form container is also constrained */
@@ -13,6 +14,7 @@ form {
   max-width: 600px; /* Optional: limit to a maximum width */
   margin: 0 auto;
   padding: 20px;
+  background-color: #FFFFFF; /* White background */
 }
 
 /* Ensure inputs take up 100% width and fit within the form */
@@ -23,15 +25,15 @@ select {
   width: 100%;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #8FC0A9;
+  border: 1px solid #BFC0C0; /* Light gray border */
   font-size: 16px;
-  box-sizing: border-box; /* Includes padding and border inside the width */
+  box-sizing: border-box;
 }
 
 /* Button styling */
 button {
-  background-color: #8FC0A9;
-  color: #FAF3DD;
+  background-color: #EF8354; /* Warm orange */
+  color: #FFFFFF;
   padding: 12px;
   border: none;
   cursor: pointer;
@@ -41,5 +43,5 @@ button {
 }
 
 button:hover {
-  background-color: #68B0AB;
+  background-color: #D65B3E; /* Darker orange on hover */
 }

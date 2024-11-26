@@ -1,33 +1,20 @@
-/* Form container */
+/* General background and container for the page */
+.category-management-container {
+  background-color: #FFFFFF; /* White background */
+  padding: 20px;
+}
+
+/* Title */
+h2 {
+  color: #2D3142; /* Dark Slate Blue */
+  font-size: 2em;
+}
+
+/* Add your category form container */
 form {
-  width: 100%;
-  max-width: 600px; /* Optional: Limit max width for better control */
-  margin: 0 auto; /* Center the form */
-  padding: 10px;
-}
-
-/* Input field should take up full width of the container */
-input[type="text"] {
-  width: 100%; /* Make the input take full width of the container */
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #8FC0A9; /* Muted teal border */
-  font-size: 16px;
-  box-sizing: border-box; /* Include padding and border inside the width */
-}
-
-/* Button styles */
-button {
-  background-color: #8FC0A9; /* Muted teal */
-  color: #FAF3DD; /* Light cream */
-  padding: 12px;
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  margin-top: 15px;
-  border-radius: 5px;
-}
-
-button:hover {
-  background-color: #68B0AB; /* Darker teal on hover */
+  background-color: #FFFFFF; /* White background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
 }

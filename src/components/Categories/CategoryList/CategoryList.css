@@ -4,7 +4,7 @@ ul {
 }
 
 li {
-  background-color: #c8d5b9;
+  background-color: #FFFFFF; /* White background */
   padding: 15px;
   border-radius: 5px;
   margin-bottom: 10px;
@@ -14,7 +14,7 @@ li {
 }
 
 button {
-  background-color: #8fc0a9;
+  background-color: #EF8354; /* Warm orange */
   border: none;
   padding: 8px 12px;
   font-size: 14px;
@@ -23,9 +23,9 @@ button {
 }
 
 button:hover {
-  background-color: #68b0ab; /* Darker teal on hover */
+  background-color: #D65B3E; /* Darker orange on hover */
 }
 
 span {
-  color: #4a7c59; /* Dark green for default categories */
+  color: #4F5D75; /* Muted blue for default categories */
 }

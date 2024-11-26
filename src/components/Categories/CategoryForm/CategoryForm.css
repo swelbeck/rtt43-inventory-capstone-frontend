@@ -1,5 +1,5 @@
 form {
-  background-color: #FAF3DD; /* Light cream background */
+  background-color: #FFFFFF; /* White background */
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -7,8 +7,8 @@ form {
 }
 
 input[type="text"] {
-  background-color: #C8D5B9; /* Pale green */
-  border: 1px solid #8FC0A9; /* Muted teal */
+  background-color: #BFC0C0; /* Light Gray */
+  border: 1px solid #4F5D75; /* Muted blue border */
   padding: 12px;
   width: 100%;
   margin-top: 10px;
@@ -16,10 +16,10 @@ input[type="text"] {
 }
 
 button {
-  background-color: #8FC0A9; /* Muted teal */
+  background-color: #EF8354; /* Warm orange */
+  color: #FFFFFF;
   padding: 12px;
   border: none;
-  color: #FAF3DD;
   font-size: 16px;
   margin-top: 15px;
   border-radius: 5px;
@@ -27,5 +27,5 @@ button {
 }
 
 button:hover {
-  background-color: #68B0AB; /* Darker teal on hover */
+  background-color: #D65B3E; /* Slightly darker orange */
 }

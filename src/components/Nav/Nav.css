@@ -1,16 +1,16 @@
 nav {
-  background-color: #68B0AB; /* Teal background */
+  background-color: #EF8354; /* Warm orange */
   padding: 15px;
   text-align: center;
 }
 
 nav a {
-  color: #FAF3DD;
+  color: #FFFFFF; /* White text */
   font-size: 18px;
   text-decoration: none;
   margin: 0 20px;
 }
 
 nav a:hover {
-  color: #C8D5B9; /* Pale green on hover */
+  color: #BFC0C0; /* Light gray on hover */
 }

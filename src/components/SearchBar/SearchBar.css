@@ -1,23 +1,20 @@
-/* Ensure the form is constrained */
 form.search-bar-form {
   width: 100%;
-  max-width: 600px; /* Optional: Limit max width for better control */
-  margin: 0 auto; /* Center the form */
+  max-width: 600px;
+  margin: 0 auto;
   padding: 10px;
 }
 
-/* Input fields should take up 100% width of the container */
 form.search-bar-form input[type="text"] {
   width: 100%;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #8FC0A9; /* Muted teal border */
+  border: 1px solid #BFC0C0; /* Light gray border */
   font-size: 16px;
-  box-sizing: border-box; /* Ensures padding and border are included in width */
+  box-sizing: border-box;
 }
 
-/* Focus effect for input */
 form.search-bar-form input[type="text"]:focus {
-  border-color: #68B0AB; /* Change border color on focus */
+  border-color: #EF8354; /* Warm orange on focus */
   outline: none;
 }
