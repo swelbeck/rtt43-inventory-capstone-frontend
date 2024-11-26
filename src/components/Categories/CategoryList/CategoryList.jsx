@@ -1,7 +1,7 @@
 // CategoryList.jsx
 
 import { useState } from "react";
-import "./CategoryList.css"
+import "./CategoryList.css";
 
 export default function CategoryList({ categories, onDelete, onEdit }) {
   const [editingCategoryId, setEditingCategoryId] = useState(null);
@@ -34,6 +34,7 @@ export default function CategoryList({ categories, onDelete, onEdit }) {
           ) : (
             <div>
               {cat.name}
+              {"  "}
               {/* Only show buttons for user-created categories (not default ones) */}
               {cat.createdBy !== "system" && (
                 <>

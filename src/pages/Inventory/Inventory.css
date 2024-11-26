@@ -2,7 +2,7 @@
 
 .inventory-container {
   padding: 20px;
-  background-color: #FFFFFF; /* White background */
+  background-color: #ffffff; /* White background */
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
 }
@@ -23,19 +23,19 @@
 /* Style for the search bar and dropdown */
 .search-category-container input,
 .search-category-container select {
-  width: 48%; 
+  width: 48%;
   padding: 12px;
-  height: 50px; 
+  height: 50px;
   border-radius: 5px;
-  border: 1px solid #BFC0C0; /* Light gray border */
+  border: 1px solid #bfc0c0; /* Light gray border */
   font-size: 16px;
-  box-sizing: border-box; 
+  box-sizing: border-box;
 }
 
 /* Button styling for 'Add Item to Inventory' */
 .add-item-button {
-  background-color: #B2C8DC; 
-  color: #FFFFFF;
+  background-color: #b2c8dc;
+  color: #ffffff;
   padding: 12px;
   border: none;
   font-size: 16px;
@@ -43,22 +43,26 @@
   cursor: pointer;
   display: inline-block;
   margin-top: 20px;
-  text-decoration: none; 
+  margin-bottom: 20px;
+  text-decoration: none;
 }
 
 .add-item-button:hover {
-  background-color: #D65B3E; /* Slightly darker orange on hover */
+  background-color: #d65b3e; /* Slightly darker orange on hover */
 }
 
 /* Inventory Item Categories Styling */
 .categories {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Grid layout for items */
+  grid-template-columns: repeat(
+    auto-fill,
+    minmax(250px, 1fr)
+  ); /* Grid layout for items */
   gap: 20px;
 }
 
 .category-headings {
-  color: #2D3142; /* Dark Slate Blue */
+  color: #2d3142; /* Dark Slate Blue */
   font-weight: bold;
   text-transform: capitalize;
 }

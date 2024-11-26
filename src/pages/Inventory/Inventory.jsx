@@ -14,23 +14,9 @@ export default function Inventory() {
   const [searchFormData, setSearchFormData] = useState({ searchParams: "" });
 
   useEffect(() => {
-    // console.log("Categories: ", categories);
-    // console.log("Inventory: ", inventory);
+
   }, [categories, inventory]);
 
-  // Group items by category
-  // const categorizedItems = useMemo(() => {
-  //   if (!Array.isArray(inventory)) {
-  //     return {}; // If inventory is not an array, return empty object
-  //   }
-
-  //   return inventory.reduce((acc, item) => {
-  //     const category = item.category?.trim().toLowerCase() || "uncategorized";
-  //     if (!acc[category]) acc[category] = [];
-  //     acc[category].push(item);
-  //     return acc;
-  //   }, {});
-  // }, [inventory]);
 
   useEffect(() => {
     let itemsToFilter = inventory;
